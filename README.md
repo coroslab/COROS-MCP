@@ -1,22 +1,22 @@
-[中文](README.md) | [English](README.en.md) | [Gateway Skill](skill/coros_mcp_login_gateway/SKILL.md)
+[中文](README.md) | [English](README.en.md) | [Skill](skill/coros_mcp_login_gateway/SKILL.md)
 
 # COROS MCP
 
-> COROS MCP 的对外集成仓库：这里放置 Agent Skill、使用说明，以及接入 COROS MCP 网关所需的轻量工具。
+> 让 AI 客户端在用户授权后读取并分析 COROS 运动与健康数据。
 
-[![MCP Gateway](https://img.shields.io/badge/MCP-Gateway-blue)](https://mcp.coros.com)
+[![COROS MCP](https://img.shields.io/badge/COROS-MCP-blue)](https://mcp.coros.com)
 [![Skill](https://img.shields.io/badge/Agent-Skill-green)](skill/coros_mcp_login_gateway/SKILL.md)
 
-COROS MCP 让支持 MCP 的 AI 客户端在用户授权后读取 COROS 运动与健康数据。当前网关入口是 `https://mcp.coros.com`，会自动分配到 CN、EU 或 US 区域。
+这个仓库提供 Agent Skill、使用说明和 OpenClaw 接入脚本。当前连接入口是 `https://mcp.coros.com`，服务会自动选择合适的 CN、EU 或 US 区域。
 
 ## 架构
 
-这个仓库服务于 COROS MCP 的客户端接入侧：线上 MCP 服务负责认证和数据工具，本仓库负责把这些能力带到 Agent 和本地客户端中。
+COROS MCP 负责登录授权和数据工具，本仓库负责把这些能力带到 Agent 和本地客户端中。
 
 | 部分 | 作用 |
 | --- | --- |
-| COROS MCP 网关 | 统一入口，完成登录、区域分配和 MCP 调用 |
-| `coros_mcp_login_gateway` Skill | 帮 Agent 自动配置 OpenClaw、完成登录、发现工具并调用工具 |
+| COROS MCP 服务 | 处理登录授权，并提供运动、健康、训练等数据工具 |
+| Agent Skill | 帮 Agent 自动配置 OpenClaw、完成登录、发现工具并调用工具 |
 | README 文档 | 面向用户说明可以做什么、怎么开始使用 |
 
 ## 仓库结构
@@ -105,7 +105,7 @@ python3 scripts/coros_mcp_login.py call-tool --tool queryUserInfo --arguments-js
 
 | 模块 | 说明 | 路径 |
 | --- | --- | --- |
-| Gateway Skill | 通过 `mcp.coros.com` 登录并配置 OpenClaw | [`skill/coros_mcp_login_gateway/`](skill/coros_mcp_login_gateway/) |
+| COROS MCP Skill | 登录 COROS MCP 并配置 OpenClaw | [`skill/coros_mcp_login_gateway/`](skill/coros_mcp_login_gateway/) |
 | Skill 指令 | 告诉 Agent 何时使用、如何登录、如何发现和调用工具 | [`SKILL.md`](skill/coros_mcp_login_gateway/SKILL.md) |
 | 登录脚本 | 执行登录、刷新、OpenClaw 配置、工具发现和工具调用 | [`coros_mcp_login.py`](skill/coros_mcp_login_gateway/scripts/coros_mcp_login.py) |
 
@@ -118,7 +118,7 @@ python3 -m unittest discover -s tests
 
 ## 链接
 
-- COROS MCP Gateway: [https://mcp.coros.com](https://mcp.coros.com)
+- COROS MCP: [https://mcp.coros.com](https://mcp.coros.com)
 - Skill: [`skill/coros_mcp_login_gateway/`](skill/coros_mcp_login_gateway/)
 
 ## 许可

@@ -1,22 +1,22 @@
-[中文](README.md) | [English](README.en.md) | [Gateway Skill](skill/coros_mcp_login_gateway/SKILL.md)
+[中文](README.md) | [English](README.en.md) | [Skill](skill/coros_mcp_login_gateway/SKILL.md)
 
 # COROS MCP
 
-> The integration home for COROS MCP: Agent Skill, usage docs, and lightweight helpers for connecting to the COROS MCP gateway.
+> Let AI clients read and analyze COROS activity and wellness data after user authorization.
 
-[![MCP Gateway](https://img.shields.io/badge/MCP-Gateway-blue)](https://mcp.coros.com)
+[![COROS MCP](https://img.shields.io/badge/COROS-MCP-blue)](https://mcp.coros.com)
 [![Skill](https://img.shields.io/badge/Agent-Skill-green)](skill/coros_mcp_login_gateway/SKILL.md)
 
-COROS MCP lets MCP-capable AI clients read a user's COROS activity and wellness data after authorization. The current gateway is `https://mcp.coros.com`, which automatically routes the session to the CN, EU, or US cluster.
+This repository provides an Agent Skill, usage docs, and an OpenClaw setup helper. The current connection entry is `https://mcp.coros.com`, and the service automatically chooses the appropriate CN, EU, or US region.
 
 ## Architecture
 
-This repository focuses on the client integration side of COROS MCP. The hosted MCP service handles authentication and data tools; this repository brings those capabilities into agents and local clients.
+COROS MCP handles authorization and data tools; this repository brings those capabilities into agents and local clients.
 
 | Part | Purpose |
 | --- | --- |
-| COROS MCP Gateway | Unified entry point for login, regional routing, and MCP calls |
-| `coros_mcp_login_gateway` Skill | Helps an agent configure OpenClaw, complete login, discover tools, and call tools |
+| COROS MCP Service | Handles login authorization and provides activity, wellness, and training data tools |
+| Agent Skill | Helps an agent configure OpenClaw, complete login, discover tools, and call tools |
 | README Docs | Explain what COROS MCP can do and how to start using it |
 
 ## Repository Structure
@@ -105,7 +105,7 @@ python3 scripts/coros_mcp_login.py call-tool --tool queryUserInfo --arguments-js
 
 | Module | Description | Path |
 | --- | --- | --- |
-| Gateway Skill | Logs in through `mcp.coros.com` and configures OpenClaw | [`skill/coros_mcp_login_gateway/`](skill/coros_mcp_login_gateway/) |
+| COROS MCP Skill | Logs in to COROS MCP and configures OpenClaw | [`skill/coros_mcp_login_gateway/`](skill/coros_mcp_login_gateway/) |
 | Skill Instructions | Tells the agent when to use the skill and how to login, discover tools, and call tools | [`SKILL.md`](skill/coros_mcp_login_gateway/SKILL.md) |
 | Login Helper | Handles login, refresh, OpenClaw configuration, tool discovery, and tool calls | [`coros_mcp_login.py`](skill/coros_mcp_login_gateway/scripts/coros_mcp_login.py) |
 
@@ -118,7 +118,7 @@ python3 -m unittest discover -s tests
 
 ## Links
 
-- COROS MCP Gateway: [https://mcp.coros.com](https://mcp.coros.com)
+- COROS MCP: [https://mcp.coros.com](https://mcp.coros.com)
 - Skill: [`skill/coros_mcp_login_gateway/`](skill/coros_mcp_login_gateway/)
 
 ## License
