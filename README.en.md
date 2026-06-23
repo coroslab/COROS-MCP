@@ -47,192 +47,204 @@ npm install -g coros-mcp
 
 ## Tool List
 
-### Activity Analytics
+<details open>
+<summary><strong>Activity Analytics</strong></summary>
 
 <table>
   <thead>
     <tr>
-      <th width="32%">Tool</th>
-      <th>Description</th>
-      <th width="12%">Status</th>
+      <th width="34%" nowrap>Tool</th>
+      <th width="52%">Description</th>
+      <th width="14%" nowrap>Status</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code>querySportRecords</code></td>
+      <td nowrap><code>querySportRecords</code></td>
       <td>Query COROS activity records with filters for date, sport type code, distance, duration, pace, and location. Returns activity IDs and time info needed for subsequent detail and lap queries.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>getActivityDetail</code></td>
+      <td nowrap><code>getActivityDetail</code></td>
       <td>Query detailed activity data including heart rate, pace/speed, elevation, cadence, and other comprehensive metrics.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>analyzeActivityDetail</code></td>
+      <td nowrap><code>analyzeActivityDetail</code></td>
       <td>Generate coach-style analysis based on activity details, with optional focus on pace, speed, or heart rate.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>queryActivityLapData</code></td>
+      <td nowrap><code>queryActivityLapData</code></td>
       <td>Query default lap or segment data for a specified activity, returned according to the display fields for that sport type in the COROS App.</td>
-      <td><code>new</code></td>
+      <td nowrap><code>new</code></td>
     </tr>
     <tr>
-      <td><code>queryCustomActivityLapData</code></td>
+      <td nowrap><code>queryCustomActivityLapData</code></td>
       <td>Query custom segment data within a precise time window of a specified activity, suitable for analyzing the last N minutes or a particular segment.</td>
-      <td><code>new</code></td>
+      <td nowrap><code>new</code></td>
     </tr>
     <tr>
-      <td><code>downloadActivityFitFiles</code></td>
+      <td nowrap><code>downloadActivityFitFiles</code></td>
       <td>Download FIT files for one or more activities for parsing complete raw activity data. Supports download by individual activity or date range.</td>
-      <td><code>new</code></td>
+      <td nowrap><code>new</code></td>
     </tr>
     <tr>
-      <td><code>queryActivityFitFileDownloadUrls</code></td>
+      <td nowrap><code>queryActivityFitFileDownloadUrls</code></td>
       <td>Query raw download URLs for activity FIT files, as a fallback when the client cannot receive binary files.</td>
-      <td><code>new</code></td>
+      <td nowrap><code>new</code></td>
     </tr>
   </tbody>
 </table>
 
-### Health & Recovery
+</details>
+
+<details open>
+<summary><strong>Health &amp; Recovery</strong></summary>
 
 <table>
   <thead>
     <tr>
-      <th width="32%">Tool</th>
-      <th>Description</th>
-      <th width="12%">Status</th>
+      <th width="34%" nowrap>Tool</th>
+      <th width="52%">Description</th>
+      <th width="14%" nowrap>Status</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code>queryDailyHealthData</code></td>
+      <td nowrap><code>queryDailyHealthData</code></td>
       <td>Query daily health overview including steps, calories, stress, sleep, and heart rate summary. For heart-rate-only queries, use the dedicated heart rate tools.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>querySleepData</code></td>
+      <td nowrap><code>querySleepData</code></td>
       <td>Query sleep score, main sleep duration, deep/light/REM ratios, wakefulness, sleep window, and nap information.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>querySleepHrv</code></td>
+      <td nowrap><code>querySleepHrv</code></td>
       <td>Query official sleep HRV assessment and raw curves. Daily averages, normal ranges, and evaluations are based on official assessment.</td>
-      <td><code>new</code></td>
+      <td nowrap><code>new</code></td>
     </tr>
     <tr>
-      <td><code>queryAvgHeartRate</code></td>
+      <td nowrap><code>queryAvgHeartRate</code></td>
       <td>Query daily average heart rate trends.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>queryRestingHeartRate</code></td>
+      <td nowrap><code>queryRestingHeartRate</code></td>
       <td>Query daily resting heart rate trends.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>queryStressLevel</code></td>
+      <td nowrap><code>queryStressLevel</code></td>
       <td>Query daily average stress trends.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>queryHealthCheckTimeSeries</code></td>
+      <td nowrap><code>queryHealthCheckTimeSeries</code></td>
       <td>Query raw health check measurement curves including heart rate, HRV, stress, respiratory rate, and SpO2. Maximum query window is 7 days.</td>
-      <td><code>new</code></td>
+      <td nowrap><code>new</code></td>
     </tr>
     <tr>
-      <td><code>queryStressTimeSeries</code></td>
+      <td nowrap><code>queryStressTimeSeries</code></td>
       <td>Query raw stress data points including time, stress value, display score, stress HRV, and stress heart rate. Maximum query window is 7 days.</td>
-      <td><code>new</code></td>
+      <td nowrap><code>new</code></td>
     </tr>
     <tr>
-      <td><code>queryRecoveryStatus</code></td>
+      <td nowrap><code>queryRecoveryStatus</code></td>
       <td>Query current recovery percentage, recovery level, and estimated full recovery time.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>queryMenstruationCycles</code></td>
-      <td>Query menstrual cycle data including today's status, next period, daily phase, and cycle range.</td>
-      <td><code>new</code></td>
+      <td nowrap><code>queryMenstruationCycles</code></td>
+      <td>Query menstrual cycle data including today&#x27;s status, next period, daily phase, and cycle range.</td>
+      <td nowrap><code>new</code></td>
     </tr>
   </tbody>
 </table>
 
-### Training Management
+</details>
+
+<details open>
+<summary><strong>Training Management</strong></summary>
 
 <table>
   <thead>
     <tr>
-      <th width="32%">Tool</th>
-      <th>Description</th>
-      <th width="12%">Status</th>
+      <th width="34%" nowrap>Tool</th>
+      <th width="52%">Description</th>
+      <th width="14%" nowrap>Status</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code>queryFitnessAssessmentOverview</code></td>
+      <td nowrap><code>queryFitnessAssessmentOverview</code></td>
       <td>Query fitness assessment overview including VO2max, Running Performance, threshold pace, and 5K/10K/half-marathon/marathon race predictions.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>queryTrainingLoadAssessment</code></td>
+      <td nowrap><code>queryTrainingLoadAssessment</code></td>
       <td>Query training load assessment including recent daily comments, short-term load, long-term load, and load ratio.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>queryTrainingSchedule</code></td>
-      <td>Query training schedule. Defaults to this week's plan and also supports specifying a date range. Results include internal identifiers for subsequent planning tools.</td>
-      <td><code>now</code></td>
+      <td nowrap><code>queryTrainingSchedule</code></td>
+      <td>Query training schedule. Defaults to this week&#x27;s plan and also supports specifying a date range. Results include internal identifiers for subsequent planning tools.</td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>queryTrainingPlanDetail</code></td>
+      <td nowrap><code>queryTrainingPlanDetail</code></td>
       <td>Query training plan details for confirming the current plan, workout dayNo, idInPlan, estimated metrics, and original workout structure before updating a plan.</td>
-      <td><code>coming&nbsp;soon</code></td>
+      <td nowrap><code>coming&nbsp;soon</code></td>
     </tr>
     <tr>
-      <td><code>generateTrainingPlan</code></td>
+      <td nowrap><code>generateTrainingPlan</code></td>
       <td>Create and save a COROS training plan based on designed structured workouts. Supports running, cycling, strength, rest workouts, and phase descriptions.</td>
-      <td><code>coming&nbsp;soon</code></td>
+      <td nowrap><code>coming&nbsp;soon</code></td>
     </tr>
     <tr>
-      <td><code>updateTrainingPlan</code></td>
+      <td nowrap><code>updateTrainingPlan</code></td>
       <td>Update an existing COROS training plan. Plan details should be queried first, and only the dayNo workouts that need replacement should be submitted.</td>
-      <td><code>coming&nbsp;soon</code></td>
+      <td nowrap><code>coming&nbsp;soon</code></td>
     </tr>
   </tbody>
 </table>
 
-### Other
+</details>
+
+<details open>
+<summary><strong>Other</strong></summary>
 
 <table>
   <thead>
     <tr>
-      <th width="32%">Tool</th>
-      <th>Description</th>
-      <th width="12%">Status</th>
+      <th width="34%" nowrap>Tool</th>
+      <th width="52%">Description</th>
+      <th width="14%" nowrap>Status</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code>queryDevices</code></td>
+      <td nowrap><code>queryDevices</code></td>
       <td>Query the list of COROS devices bound to the user, including device ID, firmware type, and custom name.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
     <tr>
-      <td><code>queryUserInfo</code></td>
+      <td nowrap><code>queryUserInfo</code></td>
       <td>Query basic user profile including height, weight, birthday, and gender.</td>
-      <td><code>now</code></td>
+      <td nowrap></td>
     </tr>
   </tbody>
 </table>
+
+</details>
 
 > Note: As the project continues to evolve, the MCP tool list may change. To view the latest available tools, manually refresh the MCP tool list in your AI platform.
 
 ## FAQ
 
-#### Which platforms does COROS MCP support?
+#### 1. Which platforms does COROS MCP support?
 
 MCP is an open standard for connecting external systems. You can think of MCP as a "USB port" for AI applications. Whether a platform can connect depends on whether it supports adding MCP services and whether it supports the authentication method required by COROS MCP.
 
@@ -240,13 +252,13 @@ We currently recommend using verified platforms first, such as ChatGPT, Claude, 
 
 If the platform you use does not yet support MCP, you can follow its future updates. Once the platform opens compatible MCP connection capabilities, you will be able to connect COROS according to that platform's rules.
 
-#### Do I need to pay to use COROS MCP?
+#### 2. Do I need to pay to use COROS MCP?
 
 COROS MCP itself is free of charge. You can authorize and connect your COROS account on AI platforms that support MCP, then use the currently available features.
 
 Please note that some AI platforms may apply membership, subscription, or quota limits to MCP, external tool connections, advanced models, or developer mode settings. These fees are charged by the corresponding AI platform and are not determined by COROS. Please refer to the latest rules of the platform you use.
 
-#### Unable to complete authorization?
+#### 3. Unable to complete authorization?
 
 First, make sure your COROS account can log in and work normally in the COROS App, and that your account already contains data that can be viewed.
 
@@ -260,36 +272,19 @@ If authorization still fails, please check:
 
 If repeated attempts still fail, save a screenshot of the error message and contact COROS customer support for troubleshooting.
 
-#### MCP URL is invalid?
+#### 4. MCP URL is invalid?
 
 The current COROS MCP uses domain redirection technology (https://mcp.coros.com/mcp), which automatically switches to the best server based on the actual region of your account. However, some AI platforms do not support domain redirects, which may cause errors or connection failures.
 
 If you encounter an invalid URL error, copy and enter the corresponding standalone routing URL based on the actual region of your account.
 
-<table>
-  <thead>
-    <tr>
-      <th>Account region</th>
-      <th>Standalone routing URL</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Mainland China</td>
-      <td><code>https://mcpcn.coros.com/mcp</code></td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td><code>https://mcpeu.coros.com/mcp</code></td>
-    </tr>
-    <tr>
-      <td>United States</td>
-      <td><code>https://mcpus.coros.com/mcp</code></td>
-    </tr>
-  </tbody>
-</table>
+| Account region | Standalone routing URL |
+| :--- | :--- |
+| Mainland China | `https://mcpcn.coros.com/mcp` |
+| Europe | `https://mcpeu.coros.com/mcp` |
+| United States | `https://mcpus.coros.com/mcp` |
 
-#### AI cannot retrieve COROS data?
+#### 5. AI cannot retrieve COROS data?
 
 If COROS MCP has been connected successfully but AI cannot retrieve data, try the following steps:
 
@@ -299,7 +294,7 @@ If COROS MCP has been connected successfully but AI cannot retrieve data, try th
 
 3. Use more explicit instruction, such as: "Please call COROS MCP and check my activity records from the past 7 days."
 
-#### Why are AI answers inaccurate?
+#### 6. Why are AI answers inaccurate?
 
 AI response quality can be affected by model capability, prompt wording, accessible data range, and other factors.
 
@@ -307,7 +302,7 @@ If an answer is clearly inaccurate, try starting a new conversation, explicitly 
 
 We recommend using models with capabilities equivalent to DeepSeek V4 Flash or higher. Models with weaker tool-calling capability may fail to use tools or may use incorrect parameters.
 
-#### Can COROS MCP retrieve .fit files?
+#### 7. Can COROS MCP retrieve .fit files?
 
 **Yes.** COROS MCP supports retrieving `.fit` files for activity records, enabling deeper data analysis.
 
@@ -323,7 +318,7 @@ We provide two ways to retrieve files:
 
 **Daily quota limit:** To ensure service stability, each account can retrieve up to **50** `.fit` files per calendar day.
 
-#### Who can see my data? Is it safe?
+#### 8. Who can see my data? Is it safe?
 
 Only after you actively authorize access can an AI application access data within the authorized scope through COROS MCP. Your COROS data remains protected by the COROS account system and privacy policy. AI conversation content and model processing methods are governed by the policies of the AI platform you use. We recommend connecting COROS MCP only on platforms you trust.
 
