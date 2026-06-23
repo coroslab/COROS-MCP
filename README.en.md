@@ -53,9 +53,9 @@ npm install -g coros-mcp
 <table width="100%">
   <thead>
     <tr>
-      <th width="34%" nowrap>Tool</th>
-      <th width="52%">Description</th>
-      <th width="14%" nowrap>Status</th>
+      <th align="left" width="320" nowrap>Tool</th>
+      <th align="left" width="480">Description</th>
+      <th align="left" width="120" nowrap>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -105,9 +105,9 @@ npm install -g coros-mcp
 <table width="100%">
   <thead>
     <tr>
-      <th width="34%" nowrap>Tool</th>
-      <th width="52%">Description</th>
-      <th width="14%" nowrap>Status</th>
+      <th align="left" width="320" nowrap>Tool</th>
+      <th align="left" width="480">Description</th>
+      <th align="left" width="120" nowrap>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -172,9 +172,9 @@ npm install -g coros-mcp
 <table width="100%">
   <thead>
     <tr>
-      <th width="34%" nowrap>Tool</th>
-      <th width="52%">Description</th>
-      <th width="14%" nowrap>Status</th>
+      <th align="left" width="320" nowrap>Tool</th>
+      <th align="left" width="480">Description</th>
+      <th align="left" width="120" nowrap>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -219,9 +219,9 @@ npm install -g coros-mcp
 <table width="100%">
   <thead>
     <tr>
-      <th width="34%" nowrap>Tool</th>
-      <th width="52%">Description</th>
-      <th width="14%" nowrap>Status</th>
+      <th align="left" width="320" nowrap>Tool</th>
+      <th align="left" width="480">Description</th>
+      <th align="left" width="120" nowrap>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -281,8 +281,8 @@ If you encounter an invalid URL error, copy and enter the corresponding standalo
 <table width="100%">
   <thead>
     <tr>
-      <th width="34%" nowrap>Account region</th>
-      <th width="66%">Standalone routing URL</th>
+      <th align="left" width="320" nowrap>Account region</th>
+      <th align="left" width="600">Standalone routing URL</th>
     </tr>
   </thead>
   <tbody>
@@ -331,7 +331,7 @@ We provide two ways to retrieve files:
 
 - **Link retrieval:** Retrieve the file download link.
 
-**Note:** Whether an AI assistant can directly display or process file entities depends on the capabilities and permission controls of the AI platform you are using. If a file cannot be downloaded or read, we recommend contacting customer support for the corresponding AI platform.
+<strong>Note:</strong> Whether an AI assistant can directly display or process file entities depends on the capabilities and permission controls of the AI platform you are using. If a file cannot be downloaded or read, we recommend contacting customer support for the corresponding AI platform.
 
 **Daily quota limit:** To ensure service stability, each account can retrieve up to **50** `.fit` files per calendar day.
 
