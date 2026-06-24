@@ -2,6 +2,10 @@
 
 All notable changes to COROS MCP are documented here.
 
+### 2026-06-24
+
+- Improved the SKILL login and tool-calling flow to support the new stateless MCP endpoint without relying on the `Mcp-Session-Id` session header.
+
 ### 2026-06-23
 
 - Support querying workout split data.

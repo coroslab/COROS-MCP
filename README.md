@@ -17,7 +17,7 @@ Simply describe what you need in natural language, and AI can use COROS MCP to r
 
 - "I have a marathon in six weeks. Based on my training so far, help me create a training plan."
 
-- "Generate a 2026 London Marathon race report for me, with a tech-inspired visual style and running-themed imagery."
+- "Based on my activity records, help me generate a 2026 marathon data report image with a tech-inspired and athletic visual style."
 
 You can also use it to explore more possibilities and unlock the full value of your data. COROS believes athletes should own their own data and have the freedom to use it in whatever way they choose, and MCP is a direct expression of that belief.
 
@@ -301,7 +301,25 @@ If you encounter an invalid URL error, copy and enter the corresponding standalo
   </tbody>
 </table>
 
-#### 5. AI cannot retrieve COROS data?
+#### 5. How do I refresh the MCP tool list after COROS MCP is updated?
+
+When COROS MCP adds or updates tools, refresh the MCP tool list in your AI platform so the assistant can see the latest available capabilities. The exact refresh entry may vary by platform.
+
+If the new tools still do not appear, try starting a new conversation or reconnecting COROS MCP.
+
+#### 6. Seeing a session expired message when using the Skill?
+
+This usually happens when you connected to COROS through the Skill method with an older Skill version. Earlier Skill versions used a session-based MCP flow that depended on the `Mcp-Session-Id` session header. COROS MCP now uses the latest stateless MCP flow, and the latest Skill has been updated to support it.
+
+Update the local Skill package:
+
+```bash
+npm install -g coros-mcp@latest
+```
+
+After the update, reconnect COROS MCP or start the Skill login flow again, then retry your request.
+
+#### 7. AI cannot retrieve COROS data?
 
 If COROS MCP has been connected successfully but AI cannot retrieve data, try the following steps:
 
@@ -311,7 +329,7 @@ If COROS MCP has been connected successfully but AI cannot retrieve data, try th
 
 3. Use more explicit instruction, such as: "Please call COROS MCP and check my activity records from the past 7 days."
 
-#### 6. Why are AI answers inaccurate?
+#### 8. Why are AI answers inaccurate?
 
 AI response quality can be affected by model capability, prompt wording, accessible data range, and other factors.
 
@@ -319,7 +337,7 @@ If an answer is clearly inaccurate, try starting a new conversation, explicitly 
 
 We recommend using models with capabilities equivalent to DeepSeek V4 Flash or higher. Models with weaker tool-calling capability may fail to use tools or may use incorrect parameters.
 
-#### 7. Can COROS MCP retrieve .fit files?
+#### 9. Can COROS MCP retrieve .fit files?
 
 **Yes.** COROS MCP supports retrieving `.fit` files for activity records, enabling deeper data analysis.
 
@@ -335,7 +353,7 @@ We provide two ways to retrieve files:
 
 **Daily quota limit:** To ensure service stability, each account can retrieve up to **50** `.fit` files per calendar day.
 
-#### 8. Who can see my data? Is it safe?
+#### 10. Who can see my data? Is it safe?
 
 Only after you actively authorize access can an AI application access data within the authorized scope through COROS MCP. Your COROS data remains protected by the COROS account system and privacy policy. AI conversation content and model processing methods are governed by the policies of the AI platform you use. We recommend connecting COROS MCP only on platforms you trust.
 
