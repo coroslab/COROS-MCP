@@ -500,7 +500,7 @@ class CorosMcpLoginHelper:
             if cached_catalog is not None and cached_catalog.is_fresh():
                 return cached_catalog.tools
 
-        token, session_id = self._initialize_mcp_session()
+        token = self._initialize_mcp()
         tools: list[Dict[str, object]] = []
         cursor: Optional[str] = None
         request_id = 2
@@ -511,7 +511,6 @@ class CorosMcpLoginHelper:
                 params["cursor"] = cursor
             response = self._send_mcp_request(
                 token_set=token,
-                session_id=session_id,
                 request_id=request_id,
                 method="tools/list",
                 params=params or None,
@@ -540,10 +539,9 @@ class CorosMcpLoginHelper:
         raise AuthFlowError(f"tool not found: {tool_name}")
 
     def call_tool(self, tool_name: str, arguments: Dict[str, object]) -> Dict[str, object]:
-        token, session_id = self._initialize_mcp_session()
+        token = self._initialize_mcp()
         response = self._send_mcp_request(
             token_set=token,
-            session_id=session_id,
             request_id=2,
             method="tools/call",
             params={
@@ -656,7 +654,7 @@ class CorosMcpLoginHelper:
         print("Open this link in a browser to log in:", flush=True)
         print(login_url, flush=True)
 
-    def _initialize_mcp_session(self) -> tuple[TokenSet, str]:
+    def _initialize_mcp(self) -> TokenSet:
         token = self.ensure_token()
         initialize_response = self.http.request(
             "POST",
@@ -679,31 +677,14 @@ class CorosMcpLoginHelper:
         payload = self.http.read_json(initialize_response)
         if initialize_response.status != 200:
             raise AuthFlowError(f"mcp initialize failed: {_sanitize_payload(payload)}")
-        session_id = initialize_response.headers.get("Mcp-Session-Id")
-        if not session_id:
-            raise AuthFlowError("mcp session id missing")
         if "error" in payload:
             raise AuthFlowError(f"mcp initialize failed: {_sanitize_payload(payload['error'])}")
-
-        initialized_response = self.http.request(
-            "POST",
-            self.mcp_url,
-            headers=self._build_mcp_headers(token, session_id=session_id),
-            json_body={
-                "jsonrpc": "2.0",
-                "method": "notifications/initialized",
-            },
-        )
-        if initialized_response.status not in (200, 202, 204):
-            initialized_payload = self.http.read_json(initialized_response)
-            raise AuthFlowError(f"mcp initialized notification failed: {_sanitize_payload(initialized_payload)}")
-        return token, session_id
+        return token
 
     def _send_mcp_request(
         self,
         *,
         token_set: TokenSet,
-        session_id: str,
         request_id: int,
         method: str,
         params: Optional[Dict[str, object]] = None,
@@ -711,7 +692,7 @@ class CorosMcpLoginHelper:
         response = self.http.request(
             "POST",
             self.mcp_url,
-            headers=self._build_mcp_headers(token_set, session_id=session_id),
+            headers=self._build_mcp_headers(token_set),
             json_body={
                 "jsonrpc": "2.0",
                 "id": request_id,
@@ -726,14 +707,11 @@ class CorosMcpLoginHelper:
             raise AuthFlowError(f"mcp {method} failed: {_sanitize_payload(payload['error'])}")
         return payload
 
-    def _build_mcp_headers(self, token_set: TokenSet, *, session_id: Optional[str] = None) -> Dict[str, str]:
-        headers = {
+    def _build_mcp_headers(self, token_set: TokenSet) -> Dict[str, str]:
+        return {
             "Authorization": self.authorization_header(token_set),
             "Accept": "application/json, text/event-stream",
         }
-        if session_id:
-            headers["Mcp-Session-Id"] = session_id
-        return headers
 
 
 def build_parser() -> argparse.ArgumentParser:

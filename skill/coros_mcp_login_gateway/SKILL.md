@@ -1,6 +1,6 @@
 ---
 name: coros_mcp_login_gateway
-description: Install or refresh the COROS MCP connection inside OpenClaw through the global mcp.coros.com gateway, automatically pinning the session to the CN, EU, or US cluster selected by the gateway.
+description: Install or refresh the COROS MCP connection inside OpenClaw through the global mcp.coros.com gateway, automatically pinning the connection to the CN, EU, or US cluster selected by the gateway.
 metadata:
   openclaw:
     requires:
@@ -80,6 +80,7 @@ openclaw mcp show coros
 - If you must force a specific cluster, pass `--issuer https://mcpcn.coros.com`, `--issuer https://mcpeu.coros.com`, or `--issuer https://mcpus.coros.com`.
 - `list-tools`, `describe-tool`, and `call-tool` automatically reuse the local token cache and refresh the token before MCP requests when it is near expiry.
 - `list-tools` and `describe-tool` reuse a short-lived local tool catalog cache by default. Use `--refresh` when you want the latest live tool list immediately.
+- MCP runtime calls use the current stateless `/mcp` flow; do not require `Mcp-Session-Id` and do not send `notifications/initialized`.
 - For natural-language requests, first run cached `list-tools`, choose the best matching tool from the current server response, inspect it with `describe-tool` only when the arguments are not obvious, then run `call-tool`.
 - If the selected tool needs required arguments that are still missing, ask the user only for those missing fields instead of dumping the full schema back to them.
 - If the user explicitly asks to keep using the old password-based flow, run the helper with `--legacy` and pass `--username`. The password will be prompted interactively.
