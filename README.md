@@ -31,7 +31,9 @@ Choose either of the following methods to quickly configure COROS MCP.
 
 Add the following URL to your MCP client configuration:
 
+```text
 https://mcp.coros.com/mcp
+```
 
 > Supports mainstream platforms such as ChatGPT, Codex, and Claude.
 
@@ -41,7 +43,9 @@ https://mcp.coros.com/mcp
 
 Send the following command to your AI assistant to install it through conversation:
 
+```text
 npm install -g coros-mcp
+```
 
 > Supports OpenClaw, Workbuddy, Hermes, and other Claw-style AI assistants.
 
