@@ -1,6 +1,6 @@
 ---
 name: coros_mcp_login_gateway
-description: Install or refresh the COROS MCP connection inside OpenClaw through the global mcp.coros.com gateway, automatically pinning the connection to the CN, EU, or US cluster selected by the gateway.
+description: Connect or refresh COROS MCP through the global gateway, configure OpenClaw, and discover and call COROS tools for private activity and health queries, training plans, workout templates, and scheduled workouts.
 metadata:
   openclaw:
     requires:
@@ -9,7 +9,7 @@ metadata:
 
 # COROS MCP Login (Gateway)
 
-Use this skill when the user wants one COROS MCP login skill that enters through `mcp.coros.com` and then uses the CN, EU, or US cluster selected by the gateway.
+Use this skill to connect through `mcp.coros.com`, keep the gateway-selected CN, EU, or US cluster, and handle the user's COROS data or training requests through the helper's dynamically discovered tools.
 
 ## What to do
 
@@ -70,6 +70,48 @@ openclaw mcp show coros
    - the gateway resolved to CN, EU, or US if that matters for the request
    - the helper was able to initialize `/mcp` and discover/call the requested tool
    - any manual next step is still needed
+
+## Training requests
+
+Read this section when the user wants to create, modify, save or schedule training. These actions change the user's COROS account; a request for advice or a draft alone is not permission to save it.
+
+Refresh `list-tools --refresh` if newly documented tools are missing, then use the actual tool names and schemas returned by the connected server. Before each unfamiliar write tool, use `describe-tool` to inspect its full description and nested arguments. Do not guess fields from the examples below or assume that all regions have the same deployed version.
+
+| User intent | Tool route | Important distinction |
+| --- | --- | --- |
+| View my training plans | `queryTrainingPlanLibrary` → `queryTrainingPlanDetails` when detail is needed | A plan library is not the day-by-day schedule. |
+| Create a multi-week plan | `queryTrainingPlanLibrary` → `createTrainingPlan` | Check existing plans first; explain overlapping in-progress plans and obtain confirmation before creation. |
+| Modify an existing plan | `queryTrainingPlanLibrary` → `queryTrainingPlanDetails` → `updateTrainingPlan` | Use only an in-progress execution record with `recordRole=execution` and `editable=true`. |
+| Browse reusable workouts | `queryWorkoutLibrary` → `queryWorkoutDetails` when needed | These are templates in the user's own library. |
+| Save a reusable template | `createSingleWorkout` | Saves only to the library, without a date. |
+| Modify a library template | `queryWorkoutDetails` → `updateWorkoutDetails` | Does not alter copies already placed on the schedule. |
+| Create a brand-new workout on a date | `createScheduledWorkout` | Saves directly to that date, not to the library; do not create a template just to schedule it. |
+| Put an existing library workout on a date | `queryWorkoutLibrary` → `scheduleWorkout` | Copies the existing template, leaving the original unchanged. |
+| View or modify a standalone workout on a date | `queryTrainingSchedule` → `queryScheduledWorkoutDetails` → `updateScheduledWorkout` only when an edit is requested | Use the returned date and `idInPlan`; plan workouts instead use `updateTrainingPlan`. |
+
+### Preserve the correct training content
+
+- Obtain all identifiers from actual results. Pass plan, library-workout and scheduled-copy identifiers as full decimal strings where the live schema requires them; never interchange them or display internal IDs to the user.
+- Always read the corresponding details before editing. For a library workout or standalone scheduled workout, start from the returned course JSON, change only what the user requested and submit the complete course. Preserve unchanged sections, intensity metrics and values, free-mode targets and unset-intensity fields.
+- Plan updates are incremental by day, not by individual workout: omitted days stay unchanged, but each submitted day replaces all workouts on that day. Include every workout that must remain that day. A rest entry clears the whole day. A day with any completed workout is skipped; report these skips honestly.
+- New plans cover 4–16 natural Monday–Sunday weeks and start between today and 14 days from today. The first week may be partial; the final week must contain a workout. Changing the total length requires the complete matching phase table, and shortening can remove workouts after the new end date.
+- New structured workouts support running, cycling and trail running. Training-course sport codes are 1/2/5 (4 for a plan rest day), not activity-record codes such as 100/200. Existing library strength or swimming workouts may be scheduled even though creating or editing them is unsupported.
+- `createScheduledWorkout` and `scheduleWorkout` accept a single date from today through today + 90 days, inclusive, using the COROS account timezone. Read the live description for date, target, intensity and course-size constraints. Keep names and descriptions in natural athlete-facing language.
+- Multiple existing workouts on one date do not block adding another, but tell the user about other workouts returned by the server. Scheduling the same library workout on the same date does not add another copy; do not assume direct workout creation has the same duplicate protection.
+- Library templates and scheduled copies are independent. After updating a scheduled workout, use the saved `idInPlan` returned by that update for further changes, as it may differ.
+- Do not use creation as a workaround for a modification request, bypass `editable=false`, or clear all days to simulate quitting a plan. Moving or removing standalone scheduled workouts and quitting or deleting plans require the COROS App.
+
+### Verify writes and handle uncertain outcomes
+
+- A successful helper process does not by itself mean the requested training change succeeded: inspect `isError` and the returned content for rejection reasons, skipped days and actual saved results.
+- On a timeout, interrupted connection or incomplete response from a write, do not blindly repeat the call. Query the relevant library, plan or date first to determine whether the change was saved; if still uncertain, ask the user to verify in the COROS App before another write.
+- If a tool is absent after a live refresh, explain that the current connection does not expose it. Never claim a change was saved when only a proposed plan was produced.
+
+### Example routing
+
+- "Add a new 30-minute easy run for tomorrow": inspect `createScheduledWorkout`, resolve tomorrow's date, design the course and save directly to the schedule.
+- "Shorten tomorrow's run": query the schedule, identify whether it is a plan workout or a standalone copy, read the appropriate details, then update that object while preserving other content.
+- "Save this as a reusable workout": use `createSingleWorkout`; do not schedule it unless the user also requests a date.
 
 ## Notes
 

@@ -9,13 +9,17 @@
 
 COROS 推出了 MCP（Model Context Protocol） 能力——这是一座安全、标准化的桥梁，能让AI安全地读取您在COROS服务器上的数据。这也是主要运动手表品牌首个官方支持的MCP。
 
-您只需通过自然语言描述需求，AI 便能根据需求，通过 COROS MCP 拉取用户相应的运动、健康数据，用于进行运动分析、报表生成、健康分析、规划训练计划等多种需求：
+您只需通过自然语言描述需求，AI 便能根据需求，通过 COROS MCP 拉取用户相应的运动、健康数据，用于运动分析、报表生成、健康分析，以及创建、修改训练计划和课程、安排训练日程：
 
 - *“过去三个月我的跑步量趋势如何？”*
 
 - *“过去一个月我的睡眠情况如何？”*
 
-- *“六周后我有一场马拉松比赛——根据我的训练情况，帮我规划一个训练计划。”*
+- *“六周后我有一场马拉松比赛——根据我的训练情况，帮我创建并保存一个训练计划。”*
+
+- *“帮我在明天的日程里新建一节 30 分钟轻松跑。”*
+
+- *“把明天已安排的跑步课缩短到 20 分钟，不改课程库模板。”*
 
 - *“根据我的运动记录，帮我生成一张2026年度马拉松数据报告，要具有科技感和运动风格的图片。”*
 
@@ -146,7 +150,7 @@ npm install -g coros-mcp
     </tr>
     <tr>
       <td nowrap><code>queryHealthCheckTimeSeries</code></td>
-      <td>查询健康快测原始曲线，包括心率、HRV、压力、呼吸率和血氧；最近查询窗口最多 7 天。</td>
+      <td>查询健康快测原始曲线，包括心率、HRV、压力、呼吸率和血氧；最近天数模式最多 7 天，明确指定日期范围可更长；最近窗口没有完整快测时，可返回历史最近一次完整快测。</td>
       <td nowrap><code>new</code></td>
     </tr>
     <tr>
@@ -193,23 +197,68 @@ npm install -g coros-mcp
     </tr>
     <tr>
       <td nowrap><code>queryTrainingSchedule</code></td>
-      <td>查询训练日程，默认返回本周计划，也支持指定日期范围；结果包含供后续计划工具使用的内部标识。</td>
+      <td>查询本周或指定日期范围的训练日程；修改前需区分计划内课程与独立排期课程。</td>
       <td nowrap></td>
     </tr>
     <tr>
-      <td nowrap><code>queryTrainingPlanDetail</code></td>
-      <td>查询训练计划详情，用于更新计划前确认当前计划、课程 dayNo、idInPlan、预估指标和原始课程结构。</td>
-      <td nowrap><code>coming&nbsp;soon</code></td>
+      <td nowrap><code>queryTrainingPlanLibrary</code></td>
+      <td>按状态和类型查看用户的训练计划，并返回是否可编辑。</td>
+      <td nowrap><code>new</code></td>
     </tr>
     <tr>
-      <td nowrap><code>generateTrainingPlan</code></td>
-      <td>根据已设计好的结构化课程创建并保存 COROS 训练计划；支持跑步、骑行、力量、休息课程和阶段说明。</td>
-      <td nowrap><code>coming&nbsp;soon</code></td>
+      <td nowrap><code>queryTrainingPlanDetails</code></td>
+      <td>查看指定训练计划及课程结构，在修改前确认原有内容。</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>createTrainingPlan</code></td>
+      <td>创建并保存 4–16 个自然周的训练计划，支持跑步、骑行、越野跑、休息日和周期阶段，并从指定日期开始执行。</td>
+      <td nowrap><code>new</code></td>
     </tr>
     <tr>
       <td nowrap><code>updateTrainingPlan</code></td>
-      <td>更新已有 COROS 训练计划；应先查询计划详情，只提交需要替换的 dayNo 课程。</td>
-      <td nowrap><code>coming&nbsp;soon</code></td>
+      <td>修改可编辑的进行中执行计划；提交的日期会整天替换课程，未提交的日期保持不变。</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>queryWorkoutLibrary</code></td>
+      <td>查看用户自己课程库中保存的可复用课程。</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>queryWorkoutDetails</code></td>
+      <td>查看课程库模板的内容与可编辑状态，为修改做准备。</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>createSingleWorkout</code></td>
+      <td>创建跑步、骑行或越野跑课程模板，只保存到课程库，不安排日期。</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>updateWorkoutDetails</code></td>
+      <td>整体修改可编辑的课程库模板，不影响已经排到日程上的副本。</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>scheduleWorkout</code></td>
+      <td>把库中已有课程复制到指定日期，包括已有的力量或游泳课程；不改变课程库原件。</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>createScheduledWorkout</code></td>
+      <td>在指定日期直接新建跑步、骑行或越野跑课程，不加入课程库。</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>queryScheduledWorkoutDetails</code></td>
+      <td>根据日期和日程副本编号，查看独立排期课程的内容与可编辑状态。</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>updateScheduledWorkout</code></td>
+      <td>整体修改某天可编辑的独立排期课程，不改变库原件；计划内课程使用 updateTrainingPlan。</td>
+      <td nowrap><code>new</code></td>
     </tr>
   </tbody>
 </table>
@@ -244,6 +293,17 @@ npm install -g coros-mcp
 </details>
 
 > 注：随着项目持续迭代，MCP 工具列表可能发生变化，如需了解最新可用工具，请在 AI 平台中手动刷新 MCP 工具列表。
+
+### 修改训练时，先区分保存位置
+
+- **多周训练计划：** 创建或修改训练计划。新计划覆盖 4–16 个自然周，开始日期在今天至今天后 14 天内；与进行中计划重叠时需先确认。
+- **可复用模板：** 在课程库中保存或修改课程。修改模板不会改变已经排到日程的副本。
+- **某天的课程：** 可直接在该天新建，或把库中已有课程排到该天。新建和排期支持今天至今天后 90 天，含边界。
+- **修改已安排的课程：** 先查详情。独立日程课程使用日程课程工具；计划内课程通过可编辑的执行计划修改，不要另建一节课来代替修改。
+- 新建结构化课程支持跑步、骑行和越野跑。课程库中已有的力量、游泳等课程可以排期，但不代表支持新建或修改这些课程。
+- 独立日程课程改期或移除、训练计划退出或删除，仍需使用 COROS App。已完成或其他不可编辑的课程可能不允许修改。
+
+创建、修改和排期会保存到你的 COROS 账号；只询问建议不代表同意保存。实际可用功能和详细限制以当前连接刷新后返回的工具说明为准。
 
 ## FAQ
 
@@ -354,7 +414,7 @@ AI 的回答质量会受到模型能力、提问方式、可访问数据范围�
 
 <strong>注：</strong> AI 助手是否能直接为您展示或处理文件实体，取决于您当前使用的 AI 平台自身的能力与权限控制。如果遇到文件无法下载或读取，建议咨询对应的 AI 平台客服。
 
-**每日额度限制：** 为保障服务稳定性，每个自然日内，单个账号最多支持获取 **50 条** `.fit` 文件。
+**下载限制：** 文件获取与下载链接获取共用固定 **24 小时**窗口内 **50 个文件**的额度，按连接的平台用户计算；后续调用不会延长该窗口。
 
 #### 10. 我的数据会被谁看到？安全吗？
 

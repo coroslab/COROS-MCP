@@ -9,13 +9,17 @@
 
 COROS has introduced MCP (Model Context Protocol), a secure and standardized bridge that allows AI to safely access your data on COROS servers. It is also the first officially supported MCP from a major sports watch brand.
 
-Simply describe what you need in natural language, and AI can use COROS MCP to retrieve the relevant activity and health data from your COROS account for activity analysis, report generation, health insights, training plan creation, and more:
+Simply describe what you need in natural language, and AI can use COROS MCP to retrieve the relevant activity and health data from your COROS account for activity analysis, report generation, health insights, and creating, updating and scheduling training plans and workouts:
 
 - "How has my running volume changed over the past three months?"
 
 - "How has my sleep been over the past month?"
 
-- "I have a marathon in six weeks. Based on my training so far, help me create a training plan."
+- "I have a marathon in six weeks. Based on my training so far, help me create and save a training plan."
+
+- "Add a new 30-minute easy run to tomorrow's schedule."
+
+- "Shorten the run already on tomorrow's schedule to 20 minutes, without changing my library template."
 
 - "Based on my activity records, help me generate a 2026 marathon data report image with a tech-inspired and athletic visual style."
 
@@ -147,7 +151,7 @@ npm install -g coros-mcp
     </tr>
     <tr>
       <td nowrap><code>queryHealthCheckTimeSeries</code></td>
-      <td>Query raw health check measurement curves including heart rate, HRV, stress, respiratory rate, and SpO2. Maximum query window is 7 days.</td>
+      <td>Query raw health check measurement curves including heart rate, HRV, stress, respiratory rate, and SpO2. Recent-days searches are capped at 7 days; explicit date ranges can be longer, and recent searches may return the latest historical complete check when the recent window is empty.</td>
       <td nowrap><code>new</code></td>
     </tr>
     <tr>
@@ -194,23 +198,68 @@ npm install -g coros-mcp
     </tr>
     <tr>
       <td nowrap><code>queryTrainingSchedule</code></td>
-      <td>Query training schedule. Defaults to this week&#x27;s plan and also supports specifying a date range. Results include internal identifiers for subsequent planning tools.</td>
+      <td>Query workouts scheduled for this week or a specified date range; distinguish plan workouts from standalone scheduled workouts before editing.</td>
       <td nowrap></td>
     </tr>
     <tr>
-      <td nowrap><code>queryTrainingPlanDetail</code></td>
-      <td>Query training plan details for confirming the current plan, workout dayNo, idInPlan, estimated metrics, and original workout structure before updating a plan.</td>
-      <td nowrap><code>coming&nbsp;soon</code></td>
+      <td nowrap><code>queryTrainingPlanLibrary</code></td>
+      <td>List the user's training plans by status and type, including whether each record can be edited.</td>
+      <td nowrap><code>new</code></td>
     </tr>
     <tr>
-      <td nowrap><code>generateTrainingPlan</code></td>
-      <td>Create and save a COROS training plan based on designed structured workouts. Supports running, cycling, strength, rest workouts, and phase descriptions.</td>
-      <td nowrap><code>coming&nbsp;soon</code></td>
+      <td nowrap><code>queryTrainingPlanDetails</code></td>
+      <td>Read a selected training plan and its workout structure before making changes.</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>createTrainingPlan</code></td>
+      <td>Create and save a 4–16-natural-week plan for running, cycling or trail running, with rest days and training phases; it starts on the specified date.</td>
+      <td nowrap><code>new</code></td>
     </tr>
     <tr>
       <td nowrap><code>updateTrainingPlan</code></td>
-      <td>Update an existing COROS training plan. Plan details should be queried first, and only the dayNo workouts that need replacement should be submitted.</td>
-      <td nowrap><code>coming&nbsp;soon</code></td>
+      <td>Update an editable in-progress execution plan; submitted days replace the full day's workouts, while omitted days remain unchanged.</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>queryWorkoutLibrary</code></td>
+      <td>List reusable workouts saved in the user's own workout library.</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>queryWorkoutDetails</code></td>
+      <td>Read a library workout's content and editability before updating it.</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>createSingleWorkout</code></td>
+      <td>Save a reusable running, cycling or trail-running workout to the library without scheduling it.</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>updateWorkoutDetails</code></td>
+      <td>Replace an editable library workout; copies already on the schedule remain unchanged.</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>scheduleWorkout</code></td>
+      <td>Copy an existing library workout onto one date, including existing strength or swimming workouts; keep the library original unchanged.</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>createScheduledWorkout</code></td>
+      <td>Create a new running, cycling or trail-running workout directly on one date without adding a library template.</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>queryScheduledWorkoutDetails</code></td>
+      <td>Read one standalone scheduled workout and its editability using its date and scheduled-copy identifier.</td>
+      <td nowrap><code>new</code></td>
+    </tr>
+    <tr>
+      <td nowrap><code>updateScheduledWorkout</code></td>
+      <td>Replace an editable standalone workout on its current date without changing its library original; plan workouts use updateTrainingPlan.</td>
+      <td nowrap><code>new</code></td>
     </tr>
   </tbody>
 </table>
@@ -245,6 +294,17 @@ npm install -g coros-mcp
 </details>
 
 > Note: As the project continues to evolve, the MCP tool list may change. To view the latest available tools, manually refresh the MCP tool list in your AI platform.
+
+### Training changes: choose the right destination
+
+- **A multi-week plan:** create or update a training plan. New plans cover 4–16 natural weeks and start between today and 14 days from today; overlapping in-progress plans require confirmation.
+- **A reusable template:** save or edit a workout in the library. Editing a template does not change copies already on the schedule.
+- **A workout on a date:** create it directly on the schedule, or schedule a workout already in the library. Creating or scheduling a workout accepts dates from today through 90 days from today, inclusive.
+- **Changing an existing day:** read the details first. Edit a standalone scheduled copy with the scheduled-workout tools; edit a workout belonging to a plan through its editable execution plan. Do not create a second workout to simulate an edit.
+- New structured workouts support running, cycling and trail running. Existing library workouts from other sports, including strength and swimming, can be scheduled, but this does not mean they can be created or edited here.
+- Moving or removing standalone scheduled workouts, or quitting or deleting a plan, still requires the COROS App. Completed or otherwise non-editable workouts may be protected from changes.
+
+Creation, updates and scheduling save changes to your COROS account; asking for advice alone does not authorize saving. Actual availability and detailed limits follow the refreshed tool definitions returned by your connected server.
 
 ## FAQ
 
@@ -355,7 +415,7 @@ We provide two ways to retrieve files:
 
 <strong>Note:</strong> Whether an AI assistant can directly display or process file entities depends on the capabilities and permission controls of the AI platform you are using. If a file cannot be downloaded or read, we recommend contacting customer support for the corresponding AI platform.
 
-**Daily quota limit:** To ensure service stability, each account can retrieve up to **50** `.fit` files per calendar day.
+**Download limit:** File retrieval and download-URL retrieval share a **50-file** allowance per fixed **24-hour** window for the connected platform user; later calls do not extend that window.
 
 #### 10. Who can see my data? Is it safe?
 

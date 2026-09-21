@@ -2,6 +2,14 @@
 
 All notable changes to COROS MCP are documented here.
 
+### 2026-09-21 — Documentation and skill guidance
+
+- Updated the English and Chinese tool catalogs to match the current server source, including training-plan library/details, plan creation and updates, workout-library tools, scheduling, and standalone scheduled-workout creation/details/updates.
+- Replaced outdated training tool names and coming-soon labels; clarified running, cycling and trail-running support and the distinction between library templates and scheduled copies.
+- Added skill routing and write-safety guidance: inspect live schemas, read before editing, preserve complete days or courses as required, and verify uncertain write outcomes before retrying.
+- Corrected current health-check date-range and FIT download-window descriptions; historical entries below remain a record of earlier releases.
+- This update changes documentation only; it does not deploy server changes or publish an npm package. Tool availability follows each connected server's refreshed catalog.
+
 ### 2026-06-24
 
 - Improved the SKILL login and tool-calling flow to support the new stateless MCP endpoint without relying on the `Mcp-Session-Id` session header.
