@@ -1,4 +1,4 @@
-[English](README.md) | [中文](README.zh.md) | [Changelog](CHANGELOG.md) | [Skill](skill/)
+[English](README.md) | [中文](README.zh.md) | [更新日志](CHANGELOG/CHANGELOG.zh.md) | [Skill](skill/)
 
 # COROS MCP
 
