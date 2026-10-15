@@ -1,4 +1,4 @@
-[English](README.md) | [中文](README.zh.md) | [Changelog](changelog/CHANGELOG.md) | [Skill](skill/)
+[English](README.md) | [中文](README.zh.md) | [Changelog](changelog/CHANGELOG.md) | [Setup Guide](docs/en/getting-started.md) | [Skill](skill/)
 
 # COROS MCP
 
@@ -28,6 +28,8 @@ You can also use it to explore more possibilities and unlock the full value of y
 You can configure COROS MCP on your preferred AI platform, such as ChatGPT, OpenClaw, or Codex. Connection methods are listed below.
 
 ## Setup Guide
+
+For step-by-step instructions, see the [COROS MCP Setup Guide](docs/en/getting-started.md).
 
 Choose either of the following methods to quickly configure COROS MCP.
 

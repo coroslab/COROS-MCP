@@ -1,4 +1,4 @@
-[English](README.md) | [中文](README.zh.md) | [更新日志](changelog/CHANGELOG.zh.md) | [Skill](skill/)
+[English](README.md) | [中文](README.zh.md) | [更新日志](changelog/CHANGELOG.zh.md) | [接入指南](docs/zh/getting-started.md) | [Skill](skill/)
 
 # COROS MCP
 
@@ -28,6 +28,8 @@ COROS 推出了 MCP（Model Context Protocol） 能力——这是一座安全�
 您可以在您常用的AI平台上配置 COROS MCP，例如 ChatGPT、OpenClaw、Codex，具体的连接方式如下：
 
 ## 接入指南
+
+详细操作步骤请查看 [COROS MCP 接入指南](docs/zh/getting-started.md)。
 
 选择以下任一方式快速配置 COROS MCP
 
