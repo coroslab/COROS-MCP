@@ -1,4 +1,4 @@
-[English](README.md) | [中文](README.zh.md) | [更新日志](changelog/CHANGELOG.zh.md) | [接入指南](docs/zh/getting-started.md) | [Skill](skill/)
+[English](README.md) | [中文](README.zh.md) | [接入指南](docs/zh/getting-started.md) | [工具说明](docs/zh/tools.md) | [更新日志](changelog/CHANGELOG.zh.md)
 
 # COROS MCP
 
@@ -126,7 +126,7 @@ npm install -g coros-mcp
       <td nowrap></td>
     </tr>
     <tr>
-      <td nowrap><code>querySleepData</code></td>
+      <td nowrap><code>querySleepOverview</code></td>
       <td>查询睡眠评分、主睡眠时长、深睡/浅睡/REM 比例、清醒情况、睡眠窗口和午睡信息。</td>
       <td nowrap></td>
     </tr>

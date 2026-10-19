@@ -1,4 +1,4 @@
-[English](README.md) | [中文](README.zh.md) | [Changelog](changelog/CHANGELOG.md) | [Setup Guide](docs/en/getting-started.md) | [Skill](skill/)
+[English](README.md) | [中文](README.zh.md) | [Setup Guide](docs/en/getting-started.md) | [Tool Guide](docs/en/tools.md) | [Changelog](changelog/CHANGELOG.md)
 
 # COROS MCP
 
@@ -127,7 +127,7 @@ npm install -g coros-mcp
       <td nowrap></td>
     </tr>
     <tr>
-      <td nowrap><code>querySleepData</code></td>
+      <td nowrap><code>querySleepOverview</code></td>
       <td>Query sleep score, main sleep duration, deep/light/REM ratios, wakefulness, sleep window, and nap information.</td>
       <td nowrap></td>
     </tr>
