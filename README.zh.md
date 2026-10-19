@@ -1,427 +1,88 @@
-[English](README.md) | [中文](README.zh.md) | [接入指南](docs/zh/getting-started.md) | [工具说明](docs/zh/tools.md) | [更新日志](changelog/CHANGELOG.zh.md)
+[English](README.md)｜中文｜[接入指南](docs/zh/getting-started.md)｜[工具参考](docs/zh/tools.md)｜[常见问题](docs/zh/faq.md)｜[更新日志](changelog/CHANGELOG.zh.md)
 
 # COROS MCP
 
-[![COROS MCP](https://img.shields.io/badge/COROS-MCP-blue)](https://mcp.coros.com)
-[![Agent Skill](https://img.shields.io/badge/Agent-Skill-green)](skill/)
+**连接 COROS 与 AI，让每一次训练的数据都能派上用场。**
 
-## 简介
+COROS MCP 让你在常用的 AI 助手中，通过对话查询运动与健康数据、回顾运动表现，并创建和调整训练计划与课程。
 
-COROS 推出了 MCP（Model Context Protocol） 能力——这是一座安全、标准化的桥梁，能让AI安全地读取您在COROS服务器上的数据。这也是主要运动手表品牌首个官方支持的MCP。
+COROS 相信，运动员应该拥有自己的数据，也应该能够自由选择如何使用这些数据。通过 MCP（Model Context Protocol，模型上下文协议），你可以将 COROS 数据授权连接到自己选择的 AI 平台，探索更多使用方式。
 
-您只需通过自然语言描述需求，AI 便能根据需求，通过 COROS MCP 拉取用户相应的运动、健康数据，用于运动分析、报表生成、健康分析，以及创建、修改训练计划和课程、安排训练日程：
+## 你可以用它做什么
 
-- *“过去三个月我的跑步量趋势如何？”*
+### 回顾训练，发现变化
 
-- *“过去一个月我的睡眠情况如何？”*
+从一次跑步的分圈表现，到几个月的训练趋势，让 AI 结合实际记录回答你的问题。
 
-- *“六周后我有一场马拉松比赛——根据我的训练情况，帮我创建并保存一个训练计划。”*
-
-- *“帮我在明天的日程里新建一节 30 分钟轻松跑。”*
-
-- *“把明天已安排的跑步课缩短到 20 分钟，不改课程库模板。”*
-
-- *“根据我的运动记录，帮我生成一张2026年度马拉松数据报告，要具有科技感和运动风格的图片。”*
-
-您也可以使用它探索更多的玩法，最大化发挥数据的价值。COROS认为运动员应该拥有自己的数据，并有权自由地以任何他们选择的方式使用这些数据，而MCP就是这种信念迄今为止最直接的体现。
-
-您可以在您常用的AI平台上配置 COROS MCP，例如 ChatGPT、OpenClaw、Codex，具体的连接方式如下：
-
-## 接入指南
-
-详细操作步骤请查看 [COROS MCP 接入指南](docs/zh/getting-started.md)。
-
-选择以下任一方式快速配置 COROS MCP
-
-### 1. HTTP OAuth
-
-将以下 URL 添加到你的 MCP 客户端配置中
-
-```text
-https://mcp.coros.com/mcp
-```
-
-> 支持 ChatGPT、Codex、Claude 等主流平台
-
----
-
-### 2. Skill
-
-将以下指令发送给你的AI 助手，通过对话进行安装
-
-```text
-npm install -g coros-mcp
-```
-
-> 支持 OpenClaw、Workbuddy、Hermes 等 Claw 类AI
-
-## 工具列表
-
-<details open>
-<summary><strong>Activity Analytics</strong></summary>
-
-<table width="100%">
-  <thead>
-    <tr>
-      <th align="left" width="320" nowrap>工具</th>
-      <th align="left" width="480">说明</th>
-      <th align="left" width="120" nowrap>状态</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td nowrap><code>querySportRecords</code></td>
-      <td>查询 COROS 运动记录，支持按日期、运动类型编码、距离、时长、配速和地点筛选；返回后续查询详情、分圈所需的活动标识和时间信息。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>getActivityDetail</code></td>
-      <td>查询指定活动详情，包含心率、配速/速度、海拔、步频等综合数据。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>analyzeActivityDetail</code></td>
-      <td>基于活动详情生成教练式分析，可指定关注配速、速度或心率等重点。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryActivityLapData</code></td>
-      <td>查询指定活动的默认分圈或分段数据，按 COROS App 对应运动类型的展示字段返回。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryCustomActivityLapData</code></td>
-      <td>查询指定活动内某个精确时间窗的自定义分段数据，适合最后 N 分钟、指定片段等分析。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>downloadActivityFitFiles</code></td>
-      <td>下载一个或多个活动 FIT 文件，用于解析完整运动原始数据；支持按单个活动或日期范围下载。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryActivityFitFileDownloadUrls</code></td>
-      <td>查询活动 FIT 文件原始下载链接，作为客户端无法接收二进制文件时的兜底方式。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-  </tbody>
-</table>
-</details>
-
-<details open>
-<summary><strong>Health &amp; Recovery</strong></summary>
-
-<table width="100%">
-  <thead>
-    <tr>
-      <th align="left" width="320" nowrap>工具</th>
-      <th align="left" width="480">说明</th>
-      <th align="left" width="120" nowrap>状态</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td nowrap><code>queryDailyHealthData</code></td>
-      <td>查询每日健康总览，包括步数、卡路里、压力、睡眠和心率概览；纯心率问题应使用心率专项工具。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>querySleepOverview</code></td>
-      <td>查询睡眠评分、主睡眠时长、深睡/浅睡/REM 比例、清醒情况、睡眠窗口和午睡信息。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>querySleepHrv</code></td>
-      <td>查询睡眠 HRV 官方评估和原始曲线；日均值、正常范围和评价以官方评估为准。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryAvgHeartRate</code></td>
-      <td>查询每日平均心率趋势。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryRestingHeartRate</code></td>
-      <td>查询每日静息心率趋势。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryStressLevel</code></td>
-      <td>查询每日平均压力趋势。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryHealthCheckTimeSeries</code></td>
-      <td>查询健康快测原始曲线，包括心率、HRV、压力、呼吸率和血氧；最近天数模式最多 7 天，明确指定日期范围可更长；最近窗口没有完整快测时，可返回历史最近一次完整快测。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryStressTimeSeries</code></td>
-      <td>查询压力原始曲线点，包括时间、压力值、展示分数、压力 HRV 和压力心率值；查询窗口最多 7 天。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryRecoveryStatus</code></td>
-      <td>查询当前恢复百分比、恢复等级和预计完全恢复时间。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryMenstruationCycles</code></td>
-      <td>查询生理周期数据，包括今日状态、下次经期、每日阶段、周期范围。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-  </tbody>
-</table>
-
-</details>
-
-<details open>
-<summary><strong>Training Management</strong></summary>
-
-<table width="100%">
-  <thead>
-    <tr>
-      <th align="left" width="320" nowrap>工具</th>
-      <th align="left" width="480">说明</th>
-      <th align="left" width="120" nowrap>状态</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td nowrap><code>queryFitnessAssessmentOverview</code></td>
-      <td>查询体能评估概览，包括 VO2max、跑力、阈值配速和 5K/10K/半马/全马成绩预测。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryTrainingLoadAssessment</code></td>
-      <td>查询训练负荷评估，包括近期每日评语、短期负荷、长期负荷和负荷比。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryTrainingSchedule</code></td>
-      <td>查询本周或指定日期范围的训练日程；修改前需区分计划内课程与独立排期课程。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryTrainingPlanLibrary</code></td>
-      <td>按状态和类型查看用户的训练计划，并返回是否可编辑。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryTrainingPlanDetails</code></td>
-      <td>查看指定训练计划及课程结构，在修改前确认原有内容。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>createTrainingPlan</code></td>
-      <td>创建并保存 4–16 个自然周的训练计划，支持跑步、骑行、越野跑、休息日和周期阶段，并从指定日期开始执行。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>updateTrainingPlan</code></td>
-      <td>修改可编辑的进行中执行计划；提交的日期会整天替换课程，未提交的日期保持不变。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryWorkoutLibrary</code></td>
-      <td>查看用户自己课程库中保存的可复用课程。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryWorkoutDetails</code></td>
-      <td>查看课程库模板的内容与可编辑状态，为修改做准备。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>createSingleWorkout</code></td>
-      <td>创建跑步、骑行或越野跑课程模板，只保存到课程库，不安排日期。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>updateWorkoutDetails</code></td>
-      <td>整体修改可编辑的课程库模板，不影响已经排到日程上的副本。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>scheduleWorkout</code></td>
-      <td>把库中已有课程复制到指定日期，包括已有的力量或游泳课程；不改变课程库原件。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>createScheduledWorkout</code></td>
-      <td>在指定日期直接新建跑步、骑行或越野跑课程，不加入课程库。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryScheduledWorkoutDetails</code></td>
-      <td>根据日期和日程副本编号，查看独立排期课程的内容与可编辑状态。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-    <tr>
-      <td nowrap><code>updateScheduledWorkout</code></td>
-      <td>整体修改某天可编辑的独立排期课程，不改变库原件；计划内课程使用 updateTrainingPlan。</td>
-      <td nowrap><code>new</code></td>
-    </tr>
-  </tbody>
-</table>
-
-</details>
-
-<details open>
-<summary><strong>Other</strong></summary>
-
-<table width="100%">
-  <thead>
-    <tr>
-      <th align="left" width="320" nowrap>工具</th>
-      <th align="left" width="480">说明</th>
-      <th align="left" width="120" nowrap>状态</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td nowrap><code>queryDevices</code></td>
-      <td>查询用户绑定的 COROS 设备列表，包括设备 ID、固件类型和自定义名称。</td>
-      <td nowrap></td>
-    </tr>
-    <tr>
-      <td nowrap><code>queryUserInfo</code></td>
-      <td>查询用户基础资料，包括身高、体重、生日和性别。</td>
-      <td nowrap></td>
-    </tr>
-  </tbody>
-</table>
-
-</details>
-
-> 注：随着项目持续迭代，MCP 工具列表可能发生变化，如需了解最新可用工具，请在 AI 平台中手动刷新 MCP 工具列表。
-
-### 修改训练时，先区分保存位置
-
-- **多周训练计划：** 创建或修改训练计划。新计划覆盖 4–16 个自然周，开始日期在今天至今天后 14 天内；与进行中计划重叠时需先确认。
-- **可复用模板：** 在课程库中保存或修改课程。修改模板不会改变已经排到日程的副本。
-- **某天的课程：** 可直接在该天新建，或把库中已有课程排到该天。新建和排期支持今天至今天后 90 天，含边界。
-- **修改已安排的课程：** 先查详情。独立日程课程使用日程课程工具；计划内课程通过可编辑的执行计划修改，不要另建一节课来代替修改。
-- 新建结构化课程支持跑步、骑行和越野跑。课程库中已有的力量、游泳等课程可以排期，但不代表支持新建或修改这些课程。
-- 独立日程课程改期或移除、训练计划退出或删除，仍需使用 COROS App。已完成或其他不可编辑的课程可能不允许修改。
-
-创建、修改和排期会保存到你的 COROS 账号；只询问建议不代表同意保存。实际可用功能和详细限制以当前连接刷新后返回的工具说明为准。
-
-## FAQ
-
-#### 1. COROS MCP 支持在哪些平台上使用？
-
-MCP 是一种连接外部系统的开源标准，可以把 MCP 理解成 AI 应用的 “USB 接口”。能否接入，取决于该平台是否支持添加 MCP 服务，以及是否支持 COROS MCP 所需的认证方式。
-
-目前建议优先使用已验证支持的平台，如 ChatGPT、Claude、OpenClaw、Workbuddy、Hermes 等。
-
-如果你使用的平台暂未支持 MCP，可以关注该平台后续更新。只要平台开放兼容的 MCP 接入能力，即可按平台规则连接 COROS。
-
-#### 2. 使用 COROS MCP 需要付费吗？
-
-COROS MCP 本身不收取费用。你可以在支持 MCP 的 AI 平台中授权连接 COROS 账号并使用已开放的功能。
-
-但请注意，部分 AI 平台可能会对 MCP、外部工具连接、高级模型或开发者模式设置会员、订阅或额度限制。这些费用由对应的 AI 平台收取，并非 COROS 决定。请以你所用平台的最新规则为准。
-
-#### 3. 无法完成授权？
-
-请先确认你的 COROS 账号可以在 COROS App 中正常登录和使用，并且账号内已有可查看的数据。
-
-如果仍无法授权，请检查：
-
-1. 授权页面是否已完整打开，浏览器是否拦截了弹窗或跳转。
-
-2. 是否使用了正确的 COROS 账号登录。
-
-3. AI 平台内是否已删除旧连接并重新授权。
-
-如果多次重试仍失败，请保存报错截图，并联系 COROS 客服排查。
-
-#### 4. MCP URL 无效？
-
-当前 COROS MCP 使用了域名跳转技术（[https://mcp.coros.com/mcp](https://mcp.coros.com/mcp)），会根据您账号所在的实际区域自动切换至最佳服务器。但部分 AI 平台不支持域名重定向，从而导致报错或连接失效。
-
-如果遇到 URL 无效，请根据您**账号所在的实际地区**，直接复制并填写对应的独立分流 URL：
-
-<table width="100%">
-  <thead>
-    <tr>
-      <th align="left" width="320" nowrap>账号地区</th>
-      <th align="left" width="600">独立分流 URL</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td nowrap>中国大陆</td>
-      <td nowrap><code>https://mcpcn.coros.com/mcp</code></td>
-    </tr>
-    <tr>
-      <td nowrap>欧洲</td>
-      <td nowrap><code>https://mcpeu.coros.com/mcp</code></td>
-    </tr>
-    <tr>
-      <td nowrap>美国</td>
-      <td nowrap><code>https://mcpus.coros.com/mcp</code></td>
-    </tr>
-  </tbody>
-</table>
-
-#### 5. MCP 更新后，如何刷新工具列表？
-
-当 COROS MCP 新增或更新工具后，请在 AI 平台中刷新 MCP 工具列表，让 AI 助手看到最新可用能力。不同平台的刷新入口可能不同。
-
-如果新工具仍未出现，可以尝试新建对话，或重新连接 COROS MCP。
-
-#### 6. 使用 Skill 时提示 session 过期？
-
-这通常是因为你通过 Skill 方式登录 COROS，并且本地仍在使用旧版 Skill。此前的 Skill 使用依赖 `Mcp-Session-Id` 会话编号的 MCP 连接流程；现在 COROS MCP 已切换到新版无状态 MCP 流程，最新版 Skill 已完成适配。
-
-请先更新本地 Skill 包：
-
-```bash
-npm install -g coros-mcp@latest
-```
-
-更新后，重新连接 COROS MCP 或重新发起 Skill 登录流程，再重试你的请求。
-
-#### 7. AI 无法拉取到 COROS 数据？
-
-如果已成功连接 COROS MCP，但 AI 没有拉取到数据，可以按以下步骤排查：
-
-1. 确认 COROS App 内已有对应数据。设备数据需要先同步到 COROS App，再上传至云端。如果 App 内本身就没有这条数据，AI 也是无法读取到的。
-
-2. 新建一个对话窗口，或在支持的客户端中发送 /new 后重新提问。
-
-3. 使用更明确的指令，例如：“请调用 COROS MCP，查看我最近 7 天的运动记录。”
-
-#### 8. 为什么 AI 回答不准确？
-
-AI 的回答质量会受到模型能力、提问方式、可访问数据范围等因素影响。
-
-如果回答明显不准确，可以尝试换一个新对话，明确要求“调用 COROS MCP”，并指定时间范围和数据类型，例如“请调用 COROS MCP，分析我过去 4 周的跑步训练负荷变化”。
-
-推荐使用deepseek V4 flash及以上能力的模型，工具调用能力较弱的模型可能会漏用工具，或使用错误参数。
-
-#### 9. 能否拉取 .fit 文件？
-
-**支持。** COROS MCP 支持拉取运动记录的 `.fit` 文件，以便您进行更深入的数据分析。
-
-同时，通过这种方式可以避免大量秒级数据直接挤爆 AI 的上下文窗口。
-
-我们提供以下两种获取方式：
-
-- **直接获取：** 直接读取 `.fit` 文件实体。
-
-- **链接获取：** 获取文件的下载链接。
-
-<strong>注：</strong> AI 助手是否能直接为您展示或处理文件实体，取决于您当前使用的 AI 平台自身的能力与权限控制。如果遇到文件无法下载或读取，建议咨询对应的 AI 平台客服。
-
-**下载限制：** 文件获取与下载链接获取共用固定 **24 小时**窗口内 **50 个文件**的额度，按连接的平台用户计算；后续调用不会延长该窗口。
-
-#### 10. 我的数据会被谁看到？安全吗？
-
-只有在你主动授权后，AI 应用才可以通过 COROS MCP 访问授权范围内的数据。你的 COROS 数据仍受 COROS 账号体系和隐私政策保护；AI 对话内容和模型处理方式则受你所使用 AI 平台的政策约束。建议只在你信任的平台上连接 COROS MCP。
-
-## 注意事项
-
-使用 COROS MCP 服务须遵守 COROS 的[《服务条款》](https://coros.com/terms)及[《隐私政策》](https://coros.com/privacy)。在授权第三方 AI 平台前，请确认你理解该平台对对话内容、文件和工具调用数据的处理方式；建议只在你信任的平台上连接 COROS MCP，并在不再使用时及时撤销授权。
+> “对比我最近两次长距离跑，看看后半程的配速和心率有什么区别。”
+
+### 了解身体状态
+
+结合睡眠、HRV、心率、压力与训练记录，回顾近期身体状态及其与训练的关系。
+
+> “整理我最近两周的睡眠和 HRV 趋势，结合训练量看看有哪些变化。”
+
+### 把训练想法变成安排
+
+根据当前体能和比赛目标制定计划，保存到 COROS；也可以创建单节课程，或调整已安排的训练。
+
+> “我想为 8 周后的半马做准备。先查看我最近的训练和体能数据，拟一份计划，确认后再保存到 COROS。”
+
+### 探索你自己的用法
+
+制作年度运动地图、生成个人训练报告，或搭建自己的训练助手。结合 AI 平台的其他能力，你还可以查找路线资料、整理比赛信息，把 COROS 数据融入更多场景。
+
+这些只是起点。如何使用你的运动数据，由你决定。
+
+## 快速开始
+
+COROS 已上架以下平台的官方插件或连接器目录，可直接添加，无需手动配置 MCP 地址。
+
+| 平台 | 添加 COROS |
+|---|---|
+| ChatGPT | [打开插件目录](https://chatgpt.com/plugins/plugin_asdk_app_6a0694cbb2608191bbefb74ba810ab68) |
+| Claude | [打开连接器目录](https://claude.ai/directory/coros) |
+| 豆包工作 | 在插件目录中搜索 **COROS** |
+| Workbuddy | 在连接器目录中搜索 **COROS** |
+
+按页面提示完成添加、登录和授权，即可开始对话。
+
+使用其他平台，或需要通过手动 MCP、Skill 接入，请查看[接入指南](docs/zh/getting-started.md)。
+
+## 功能概览
+
+| 功能 | 支持内容 |
+|---|---|
+| 运动记录与详情 | 查询运动记录、详细指标、分圈和自定义分段，获取 FIT 文件。 |
+| 健康与恢复 | 查询睡眠、HRV、心率、压力、每日健康数据、健康快测、生理周期和恢复状态。 |
+| 体能与训练负荷 | 查看体能评估、比赛成绩预测和训练负荷。 |
+| 训练计划与课程 | 查询、创建和修改训练计划与课程，将课程安排到训练日程。 |
+| 个人资料与设备 | 查询基础资料和已绑定设备。 |
+
+完整工具说明、参数及使用限制，请查看[工具参考](docs/zh/tools.md)。
+
+## 常见问题
+
+### 支持哪些 AI 平台？
+
+除上述官方目录中的平台外，COROS MCP 也支持通过兼容的 MCP 客户端或 Skill 接入。具体是否可用，取决于所用平台的连接与认证能力。
+
+连接方式见[接入指南](docs/zh/getting-started.md)。
+
+### 使用 COROS MCP 需要付费吗？
+
+COROS MCP 本身不收取费用。你使用的 AI 平台可能对连接器、模型或工具调用设置订阅及额度限制，具体以该平台的规则为准。
+
+更多问题见[完整 FAQ](docs/zh/faq.md)。
+
+## 数据与隐私
+
+由你决定是否连接，以及授权哪个 AI 平台访问 COROS 数据。完成授权后，AI 平台可以访问授权范围内的数据；你要求保存或修改的训练内容会写入 COROS 账号。
+
+使用前，请阅读 COROS 的[服务条款](https://coros.com/terms)和[隐私政策](https://coros.com/privacy)，并了解所用 AI 平台如何处理对话、文件及工具调用数据。请只在你信任的平台上连接 COROS。
+
+## 更新与反馈
+
+- [更新日志](changelog/CHANGELOG.zh.md)：了解功能更新。
+- [GitHub Issues](https://github.com/coroslab/COROS-MCP/issues)：反馈问题或提出建议。请附上所用 AI 平台、操作步骤和报错信息，勿提供账号凭据或个人健康数据。
+- COROS 客服：账号相关问题，请通过 COROS App 联系客服。
