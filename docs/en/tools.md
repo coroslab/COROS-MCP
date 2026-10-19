@@ -12,7 +12,7 @@ This guide describes COROS MCP tools, their main parameters, returned informatio
 
 <a id="querysportrecords"></a>
 
-### Query activity records · `querySportRecords`
+### `querySportRecords`
 
 Find activities by date, sport, distance, duration, average pace, and location for detail queries, segment analysis, or FIT downloads.
 
@@ -50,7 +50,7 @@ Sport Records — 2026-09-19 to 2026-10-18 (1 records)
 
 <a id="getactivitydetail"></a>
 
-### Query activity details · `getActivityDetail`
+### `getActivityDetail`
 
 View detailed data for one completed activity.
 
@@ -81,7 +81,7 @@ Calories: 372 kcal
 
 <a id="analyzeactivitydetail"></a>
 
-### Analyze an activity · `analyzeActivityDetail`
+### `analyzeActivityDetail`
 
 Summarize the main metrics of one activity in English, with a conclusion, key findings, and a recommendation.
 
@@ -102,7 +102,7 @@ Summarize the main metrics of one activity in English, with a conclusion, key fi
 
 <a id="queryactivitylapdata"></a>
 
-### Query laps or segments · `queryActivityLapData`
+### `queryActivityLapData`
 
 Query the recorded laps or segments of an activity.
 
@@ -159,7 +159,7 @@ Query the recorded laps or segments of an activity.
 
 <a id="querycustomactivitylapdata"></a>
 
-### Query a custom activity segment · `queryCustomActivityLapData`
+### `queryCustomActivityLapData`
 
 Query data for a selected time window within one activity, such as the last five minutes.
 
@@ -180,7 +180,7 @@ Query data for a selected time window within one activity, such as the last five
 
 <a id="downloadactivityfitfiles"></a>
 
-### Download FIT files · `downloadActivityFitFiles`
+### `downloadActivityFitFiles`
 
 Download FIT files for one or more activities for analysis in clients that can receive and parse files.
 
@@ -205,7 +205,7 @@ Download FIT files for one or more activities for analysis in clients that can r
 
 <a id="queryactivityfitfiledownloadurls"></a>
 
-### Get FIT download links · `queryActivityFitFileDownloadUrls`
+### `queryActivityFitFileDownloadUrls`
 
 Get original FIT file download links when the client cannot receive FIT files directly.
 
@@ -233,7 +233,7 @@ Get original FIT file download links when the client cannot receive FIT files di
 
 <a id="querydailyhealthdata"></a>
 
-### Query daily health summaries · `queryDailyHealthData`
+### `queryDailyHealthData`
 
 Query overall daily health data for recent days.
 
@@ -251,7 +251,7 @@ Query overall daily health data for recent days.
 
 <a id="querysleepoverview"></a>
 
-### Query sleep overview · `querySleepOverview`
+### `querySleepOverview`
 
 Query sleep scores, main sleep, and naps.
 
@@ -289,7 +289,7 @@ Naps Total: 0 min
 
 <a id="querysleephrv"></a>
 
-### Query sleep HRV · `querySleepHrv`
+### `querySleepHrv`
 
 View heart rate variability (HRV) during sleep and its COROS assessment.
 
@@ -310,7 +310,7 @@ View heart rate variability (HRV) during sleep and its COROS assessment.
 
 <a id="queryavgheartrate"></a>
 
-### Query daily average heart rate · `queryAvgHeartRate`
+### `queryAvgHeartRate`
 
 Query daily average heart rate and trends.
 
@@ -330,7 +330,7 @@ Query daily average heart rate and trends.
 
 <a id="queryrestingheartrate"></a>
 
-### Query daily resting heart rate · `queryRestingHeartRate`
+### `queryRestingHeartRate`
 
 Query resting heart rate for recent days.
 
@@ -348,7 +348,7 @@ Query resting heart rate for recent days.
 
 <a id="querystresslevel"></a>
 
-### Query daily average stress · `queryStressLevel`
+### `queryStressLevel`
 
 Query daily average stress trends.
 
@@ -366,7 +366,7 @@ Query daily average stress trends.
 
 <a id="queryhealthchecktimeseries"></a>
 
-### Query wellness check data · `queryHealthCheckTimeSeries`
+### `queryHealthCheckTimeSeries`
 
 Find the latest available complete wellness check.
 
@@ -387,7 +387,7 @@ Find the latest available complete wellness check.
 
 <a id="querystresstimeseries"></a>
 
-### Query stress time series · `queryStressTimeSeries`
+### `queryStressTimeSeries`
 
 View stress changes over time for the selected dates.
 
@@ -407,7 +407,7 @@ View stress changes over time for the selected dates.
 
 <a id="queryrecoverystatus"></a>
 
-### Query current recovery status · `queryRecoveryStatus`
+### `queryRecoveryStatus`
 
 Query the current recovery level.
 
@@ -423,7 +423,7 @@ No parameters.
 
 <a id="querymenstruationcycles"></a>
 
-### Query menstrual cycles · `queryMenstruationCycles`
+### `queryMenstruationCycles`
 
 Query menstrual status, phases, cycle ranges, and notes.
 
@@ -442,7 +442,7 @@ Query menstrual status, phases, cycle ranges, and notes.
 
 <a id="queryfitnessassessmentoverview"></a>
 
-### Query fitness assessment · `queryFitnessAssessmentOverview`
+### `queryFitnessAssessmentOverview`
 
 View current fitness and running ability assessments.
 
@@ -454,7 +454,7 @@ No parameters.
 
 <a id="querytrainingloadassessment"></a>
 
-### Query training load assessment · `queryTrainingLoadAssessment`
+### `queryTrainingLoadAssessment`
 
 Review whether recent training load is appropriate.
 
@@ -468,7 +468,7 @@ Review whether recent training load is appropriate.
 
 <a id="querytrainingschedule"></a>
 
-### Query the training calendar · `queryTrainingSchedule`
+### `queryTrainingSchedule`
 
 Query workouts scheduled for a day, the current week, or a date range.
 
@@ -488,7 +488,7 @@ Query workouts scheduled for a day, the current week, or a date range.
 
 <a id="querytrainingplanlibrary"></a>
 
-### Query training plans · `queryTrainingPlanLibrary`
+### `queryTrainingPlanLibrary`
 
 Find existing training plans by execution status, source, and length.
 
@@ -510,7 +510,7 @@ Find existing training plans by execution status, source, and length.
 
 <a id="querytrainingplandetails"></a>
 
-### Query training plan details · `queryTrainingPlanDetails`
+### `queryTrainingPlanDetails`
 
 View the plan summary, all training phases, and workouts within selected dates.
 
@@ -531,7 +531,7 @@ View the plan summary, all training phases, and workouts within selected dates.
 
 <a id="createtrainingplan"></a>
 
-### Create a training plan · `createTrainingPlan`
+### `createTrainingPlan`
 
 Save a designed multi-week training plan to COROS and execute it from the specified start date.
 
@@ -553,7 +553,7 @@ Save a designed multi-week training plan to COROS and execute it from the specif
 
 <a id="updatetrainingplan"></a>
 
-### Update a training plan · `updateTrainingPlan`
+### `updateTrainingPlan`
 
 Adjust workouts, phases, or the length of an existing training plan.
 
@@ -575,7 +575,7 @@ Adjust workouts, phases, or the length of an existing training plan.
 
 <a id="queryworkoutlibrary"></a>
 
-### Query the workout library · `queryWorkoutLibrary`
+### `queryWorkoutLibrary`
 
 Find workouts saved in the workout library.
 
@@ -595,7 +595,7 @@ Find workouts saved in the workout library.
 
 <a id="queryworkoutdetails"></a>
 
-### View library workout details · `queryWorkoutDetails`
+### `queryWorkoutDetails`
 
 View the content of a workout in the library.
 
@@ -613,7 +613,7 @@ View the content of a workout in the library.
 
 <a id="createsingleworkout"></a>
 
-### Create a library workout · `createSingleWorkout`
+### `createSingleWorkout`
 
 Create a workout and save it to the library.
 
@@ -632,7 +632,7 @@ Create a workout and save it to the library.
 
 <a id="updateworkoutdetails"></a>
 
-### Update a library workout · `updateWorkoutDetails`
+### `updateWorkoutDetails`
 
 Edit a supported workout in the library.
 
@@ -652,7 +652,7 @@ Edit a supported workout in the library.
 
 <a id="scheduleworkout"></a>
 
-### Schedule a library workout · `scheduleWorkout`
+### `scheduleWorkout`
 
 Schedule an existing library workout on a selected date.
 
@@ -673,7 +673,7 @@ Schedule an existing library workout on a selected date.
 
 <a id="createscheduledworkout"></a>
 
-### Create a workout on a date · `createScheduledWorkout`
+### `createScheduledWorkout`
 
 Create a new standalone workout directly on a selected date.
 
@@ -693,7 +693,7 @@ Create a new standalone workout directly on a selected date.
 
 <a id="queryscheduledworkoutdetails"></a>
 
-### View calendar workout details · `queryScheduledWorkoutDetails`
+### `queryScheduledWorkoutDetails`
 
 Read one standalone workout already scheduled on a date.
 
@@ -713,7 +713,7 @@ Read one standalone workout already scheduled on a date.
 
 <a id="updatescheduledworkout"></a>
 
-### Update a calendar workout · `updateScheduledWorkout`
+### `updateScheduledWorkout`
 
 Edit a supported workout scheduled separately on a date.
 
@@ -739,7 +739,7 @@ Edit a supported workout scheduled separately on a date.
 
 <a id="queryuserinfo"></a>
 
-### Query user profile · `queryUserInfo`
+### `queryUserInfo`
 
 Query the currently authorized account’s profile.
 
@@ -751,7 +751,7 @@ No parameters.
 
 <a id="querydevices"></a>
 
-### Query bound devices · `queryDevices`
+### `queryDevices`
 
 View COROS devices bound to the currently authorized account.
 
