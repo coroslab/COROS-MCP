@@ -79,27 +79,6 @@ Calories: 372 kcal
 
 - The activity identifier and sport code must come from the same record. Available metrics depend on the device, sport, and recorded data.
 
-<a id="analyzeactivitydetail"></a>
-
-### `analyzeActivityDetail`
-
-Summarize the main metrics of one activity in English, with a conclusion, key findings, and a recommendation.
-
-**Main parameters**
-
-| Parameter | Type | Requirement | Description |
-|---|---|---|---|
-| `labelId` | string | Required | Activity identifier obtained from the activity list. |
-| `sportType` | integer | Required | Sport code for that activity; use the value returned with the activity. |
-| `focus` | string | Required | Summary focus: pace/speed keywords or heart rate/hr keywords, case-insensitive. Pass "" when no focus is specified. |
-
-**Returns:** An English activity summary with the main performance metrics, key findings, and a recommendation.
-
-**Limits and notes**
-
-- Use English pace or heart-rate keywords for `focus`; Chinese keywords are not supported. Pass an empty string when no focus is requested.
-- This tool provides a summary. Further analysis of changes within an activity requires detail, segment, or FIT data.
-
 <a id="queryactivitylapdata"></a>
 
 ### `queryActivityLapData`
