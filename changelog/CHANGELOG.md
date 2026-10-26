@@ -7,7 +7,7 @@ Explore COROS MCP updates.
 ### 2026-10-23
 
 - Removed the `analyzeActivityDetail` tool.
-- Fixed an issue that prevented Gemini clients from loading COROS tools ([#10](https://github.com/coroslab/COROS-MCP/issues/10)).
+- Fixed an issue that prevented some AI clients (including Gemini and DSH) from loading COROS tools ([#10](https://github.com/coroslab/COROS-MCP/issues/10)).
 - Fixed some known issues.
 
 ### 2026-09-21
