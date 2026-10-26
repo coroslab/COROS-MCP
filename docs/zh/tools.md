@@ -20,16 +20,16 @@
 
 | 参数 | 类型 | 要求 | 说明 |
 |---|---|---|---|
-| `startDate` | string | 必填 | 开始日期，格式 yyyyMMdd；传空字符串 `""` 时，取结束日期前 6 天。 |
-| `endDate` | string | 必填 | 结束日期，格式 yyyyMMdd；传空字符串 `""` 时取今天，按 COROS 账号时区计算。 |
-| `sportTypeCodes` | integer[] | 必填 | 运动记录类型编码列表；不限制运动类型时传 `[65535]`。 |
-| `minDistanceKm` | number | 必填 | 最小距离，单位 km；不启用此筛选时传 `0`。 |
-| `maxDistanceKm` | number | 必填 | 最大距离，单位 km；不启用此筛选时传 `0`。 |
-| `minDurationMinutes` | integer | 必填 | 最小时长，单位分钟；不启用此筛选时传 `0`。 |
-| `maxDurationMinutes` | integer | 必填 | 最大时长，单位分钟；不启用此筛选时传 `0`。 |
-| `maxAveragePace` | string | 必填 | 最大平均配速，如 `5:30` 表示 5 分 30 秒/km；不启用此筛选时传空字符串 `""`。 |
-| `locationKeyword` | string | 必填 | 地点关键字；不启用此筛选时传空字符串 `""`。 |
-| `limit` | integer | 必填 | 最多返回条数；未指定条数时传 `20`。 |
+| `startDate` | string | 可选 | 开始日期，格式 yyyyMMdd；省略时取结束日期前 6 天。 |
+| `endDate` | string | 可选 | 结束日期，格式 yyyyMMdd；省略时取今天，按 COROS 账号时区计算。 |
+| `sportTypeCodes` | integer[] | 可选 | 运动记录类型编码列表；省略时不限制运动类型。 |
+| `minDistanceKm` | number | 可选 | 最小距离，单位 km。 |
+| `maxDistanceKm` | number | 可选 | 最大距离，单位 km。 |
+| `minDurationMinutes` | integer | 可选 | 最小时长，单位分钟。 |
+| `maxDurationMinutes` | integer | 可选 | 最大时长，单位分钟。 |
+| `maxAveragePace` | string | 可选 | 最大平均配速，如 `5:30` 表示 5 分 30 秒/km。 |
+| `locationKeyword` | string | 可选 | 地点关键字。 |
+| `limit` | integer | 可选 | 最多返回条数；默认 20。 |
 
 **返回内容：** 符合条件的运动记录，包括日期、运动类型、地点、距离、时长、配速或速度，以及供后续详情查询使用的活动标识和起止时间。
 
@@ -276,11 +276,11 @@ Naps Total: 0 min
 
 | 参数 | 类型 | 要求 | 说明 |
 |---|---|---|---|
-| `startDate` | string | 必填 | 开始日期，格式 yyyyMMdd；仅查询结束日期当天时传 `""`；按最近天数查询时，两日期均传 `""`。 |
-| `endDate` | string | 必填 | 结束日期，格式 yyyyMMdd；传 `""` 时取 startDate；两日期均为空时按 days 查询。 |
-| `days` | integer | 必填 | 最近查询天数，最多 7 天；未指定天数时传 `7`。指定日期时此参数不生效，仍须传入。 |
+| `startDate` | string | 可选 | 开始日期，格式 yyyyMMdd；仅提供 endDate 时查询该日。 |
+| `endDate` | string | 可选 | 结束日期，格式 yyyyMMdd；省略时取 startDate；两日期均省略时按 days 查询。 |
+| `days` | integer | 可选 | 最近查询天数；默认 7，最多 7 天。指定日期时此参数不生效。 |
 
-**返回内容：** 日均 HRV、正常范围和评价，以及可用的睡眠 HRV 曲线；单位为毫秒（ms）。
+**返回内容：** 日均 HRV，以及可用的正常范围、评价和睡眠 HRV 曲线；HRV 数值单位为毫秒（ms）。
 
 **限制与提示**
 
@@ -353,9 +353,9 @@ Naps Total: 0 min
 
 | 参数 | 类型 | 要求 | 说明 |
 |---|---|---|---|
-| `startDate` | string | 必填 | 开始日期，格式 yyyyMMdd；仅查询结束日期当天时传 `""`；按最近天数查询时，两日期均传 `""`。 |
-| `endDate` | string | 必填 | 结束日期，格式 yyyyMMdd；传 `""` 时取 startDate；两日期均为空时按 days 查询。 |
-| `days` | integer | 必填 | 最近查询天数，最多 7 天；未指定天数时传 `7`。指定日期时此参数不生效，仍须传入。 |
+| `startDate` | string | 可选 | 开始日期，格式 yyyyMMdd；仅提供 endDate 时查询该日。 |
+| `endDate` | string | 可选 | 结束日期，格式 yyyyMMdd；省略时取 startDate；两日期均省略时按 days 查询。 |
+| `days` | integer | 可选 | 最近查询天数；默认 7，最多 7 天。指定日期时此参数不生效。 |
 
 **返回内容：** 最近一次完整快测的测量时间，以及可用的心率、HRV、压力、呼吸率和血氧等数据。
 
@@ -363,6 +363,7 @@ Naps Total: 0 min
 
 - 按最近天数查询时最多 7 天；指定日期优先于 `days`。
 - 单次返回最近一次完整快测，而非全部快测记录；测量时间以结果中标注的日期为准。
+- 按最近天数查询时，若范围内没有完整记录，可能返回更早的最近一次完整快测，并在结果中注明。指定日期查询仅返回所选范围内的数据。
 
 <a id="querystresstimeseries"></a>
 
@@ -374,9 +375,9 @@ Naps Total: 0 min
 
 | 参数 | 类型 | 要求 | 说明 |
 |---|---|---|---|
-| `startDate` | string | 必填 | 开始日期，格式 yyyyMMdd；仅查询结束日期当天时传 `""`；按最近天数查询时，两日期均传 `""`。 |
-| `endDate` | string | 必填 | 结束日期，格式 yyyyMMdd；传 `""` 时取 startDate；两日期均为空时按 days 查询。 |
-| `days` | integer | 必填 | 最近查询天数，最多 7 天；未指定天数时传 `1`。指定日期时此参数不生效，仍须传入。 |
+| `startDate` | string | 可选 | 开始日期，格式 yyyyMMdd；仅提供 endDate 时查询该日。 |
+| `endDate` | string | 可选 | 结束日期，格式 yyyyMMdd；省略时取 startDate；两日期均省略时按 days 查询。 |
+| `days` | integer | 可选 | 最近查询天数；默认 1，最多 7 天。指定日期时此参数不生效。 |
 
 **返回内容：** 压力随时间变化的数据，包含测量时间及可用的相关指标。
 

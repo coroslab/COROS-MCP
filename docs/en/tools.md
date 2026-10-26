@@ -20,16 +20,16 @@ Find activities by date, sport, distance, duration, average pace, and location f
 
 | Parameter | Type | Requirement | Description |
 |---|---|---|---|
-| `startDate` | string | Required | Start date in yyyyMMdd format; pass "" to use six days before the end date. |
-| `endDate` | string | Required | End date in yyyyMMdd format; pass "" to use today in the COROS account timezone. |
-| `sportTypeCodes` | integer[] | Required | List of activity sport codes; pass [65535] to include all sports. |
-| `minDistanceKm` | number | Required | Minimum distance in km; pass 0 to disable this filter. |
-| `maxDistanceKm` | number | Required | Maximum distance in km; pass 0 to disable this filter. |
-| `minDurationMinutes` | integer | Required | Minimum duration in minutes; pass 0 to disable this filter. |
-| `maxDurationMinutes` | integer | Required | Maximum duration in minutes; pass 0 to disable this filter. |
-| `maxAveragePace` | string | Required | Maximum average pace, such as 5:30 for 5 minutes 30 seconds/km; pass "" to disable this filter. |
-| `locationKeyword` | string | Required | Location keyword; pass "" to disable this filter. |
-| `limit` | integer | Required | Maximum records to return; use 20 when no count is specified. |
+| `startDate` | string | Optional | Start date in yyyyMMdd format; defaults to six days before the end date. |
+| `endDate` | string | Optional | End date in yyyyMMdd format; defaults to today in the COROS account timezone. |
+| `sportTypeCodes` | integer[] | Optional | List of activity sport codes; omit to include all sports. |
+| `minDistanceKm` | number | Optional | Minimum distance in km. |
+| `maxDistanceKm` | number | Optional | Maximum distance in km. |
+| `minDurationMinutes` | integer | Optional | Minimum duration in minutes. |
+| `maxDurationMinutes` | integer | Optional | Maximum duration in minutes. |
+| `maxAveragePace` | string | Optional | Maximum average pace, such as 5:30 for 5 minutes 30 seconds/km. |
+| `locationKeyword` | string | Optional | Location keyword. |
+| `limit` | integer | Optional | Maximum records to return; default 20. |
 
 **Returns:** Matching activities with date, sport, location, distance, duration, pace or speed, and activity identifiers and times for follow-up queries.
 
@@ -276,11 +276,11 @@ View heart rate variability (HRV) during sleep and its COROS assessment.
 
 | Parameter | Type | Requirement | Description |
 |---|---|---|---|
-| `startDate` | string | Required | Start date in yyyyMMdd format. Pass "" to query only endDate; pass "" for both dates to query recent days. |
-| `endDate` | string | Required | End date in yyyyMMdd format. Pass "" to use startDate; if both dates are empty, use days. |
-| `days` | integer | Required | Number of recent days, up to 7; use 7 when no count is specified. Still required, but ignored when dates are specified. |
+| `startDate` | string | Optional | Start date in yyyyMMdd format; if only endDate is provided, query that day. |
+| `endDate` | string | Optional | End date in yyyyMMdd format; defaults to startDate. If both dates are omitted, use days. |
+| `days` | integer | Optional | Number of recent days; default 7, maximum 7. Ignored when dates are specified. |
 
-**Returns:** Daily average HRV, normal range, evaluation, and available sleep HRV data over time, in milliseconds (ms).
+**Returns:** Daily average HRV, plus the normal range, evaluation, and sleep HRV time series where available. HRV values are in milliseconds (ms).
 
 **Limits and notes**
 
@@ -353,9 +353,9 @@ Find the latest available complete wellness check.
 
 | Parameter | Type | Requirement | Description |
 |---|---|---|---|
-| `startDate` | string | Required | Start date in yyyyMMdd format. Pass "" to query only endDate; pass "" for both dates to query recent days. |
-| `endDate` | string | Required | End date in yyyyMMdd format. Pass "" to use startDate; if both dates are empty, use days. |
-| `days` | integer | Required | Number of recent days, up to 7; use 7 when no count is specified. Still required, but ignored when dates are specified. |
+| `startDate` | string | Optional | Start date in yyyyMMdd format; if only endDate is provided, query that day. |
+| `endDate` | string | Optional | End date in yyyyMMdd format; defaults to startDate. If both dates are omitted, use days. |
+| `days` | integer | Optional | Number of recent days; default 7, maximum 7. Ignored when dates are specified. |
 
 **Returns:** The measurement time and available heart rate, HRV, stress, respiration rate, and SpO2 data from the latest complete check.
 
@@ -363,6 +363,7 @@ Find the latest available complete wellness check.
 
 - Recent-days queries cover up to 7 days. Explicit dates take priority over `days`.
 - One call returns the latest complete check, not all checks. Use the measurement date shown in the result.
+- If a recent-days query finds no complete check within the window, it may return the latest complete check from an earlier date and indicate this in the result. Explicit date queries only return data within the selected range.
 
 <a id="querystresstimeseries"></a>
 
@@ -374,9 +375,9 @@ View stress changes over time for the selected dates.
 
 | Parameter | Type | Requirement | Description |
 |---|---|---|---|
-| `startDate` | string | Required | Start date in yyyyMMdd format. Pass "" to query only endDate; pass "" for both dates to query recent days. |
-| `endDate` | string | Required | End date in yyyyMMdd format. Pass "" to use startDate; if both dates are empty, use days. |
-| `days` | integer | Required | Number of recent days, up to 7; use 1 when no count is specified. Still required, but ignored when dates are specified. |
+| `startDate` | string | Optional | Start date in yyyyMMdd format; if only endDate is provided, query that day. |
+| `endDate` | string | Optional | End date in yyyyMMdd format; defaults to startDate. If both dates are omitted, use days. |
+| `days` | integer | Optional | Number of recent days; default 1, maximum 7. Ignored when dates are specified. |
 
 **Returns:** Stress measurements over time, with measurement times and available related metrics.
 
