@@ -4,6 +4,12 @@
 
 了解 COROS MCP 的功能更新。
 
+### 2026-10-23
+
+- 移除 `analyzeActivityDetail` 工具。
+- 修复 Gemini 客户端无法加载 COROS 工具的问题（[#10](https://github.com/coroslab/COROS-MCP/issues/10)）。
+- 修复了一些已知问题。
+
 ### 2026-09-21
 
 - 支持 AI 根据体能和目标创建路跑、越野跑和骑行的训练计划及课程，并同步到 COROS；计划时长为 4–16 周。
