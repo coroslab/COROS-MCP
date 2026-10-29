@@ -4,6 +4,10 @@
 
 Explore COROS MCP updates.
 
+### 2026-10-29
+
+- Use AI to import GPX and KML route files into COROS. Once imported, view them in the COROS app and sync them to your watch for navigation.
+
 ### 2026-10-23
 
 - Removed the `analyzeActivityDetail` tool.

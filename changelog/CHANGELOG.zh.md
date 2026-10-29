@@ -4,6 +4,10 @@
 
 了解 COROS MCP 的功能更新。
 
+### 2026-10-29
+
+- 支持通过 AI 将 GPX、KML 路线文件导入 COROS，导入后可在 COROS App 中查看，并同步至手表用于导航。
+
 ### 2026-10-23
 
 - 移除 `analyzeActivityDetail` 工具。
