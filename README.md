@@ -73,6 +73,12 @@ See the [Setup Guide](docs/en/getting-started.md) for connection options.
 
 COROS MCP itself is free to use. Your AI platform may require a subscription or impose usage limits for connectors, models, or tool calls. Check that platform's policies for details.
 
+### How long does authorization last? Do I need to sign in again regularly?
+
+Access tokens are valid for 30 days. AI clients that support automatic token refresh can use a refresh token to renew access when the access token expires, so you usually do not need to sign in manually.
+
+Refresh tokens are valid for 180 days. Each successful refresh issues a new refresh token, so this does not mean you must sign in again every 180 days.
+
 For more questions, see the [full FAQ](docs/en/faq.md).
 
 ## Data and privacy

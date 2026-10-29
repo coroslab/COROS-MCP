@@ -114,3 +114,9 @@ We provide two ways to retrieve files:
 ## 10. Who can see my data? Is it safe?
 
 Only after you actively authorize access can an AI application access data within the authorized scope through COROS MCP. Your COROS data remains protected by the COROS account system and privacy policy. AI conversation content and model processing methods are governed by the policies of the AI platform you use. We recommend connecting COROS MCP only on platforms you trust.
+
+## 11. How long does authorization last? Do I need to sign in again regularly?
+
+Access tokens are valid for 30 days. AI clients that support automatic token refresh can use a refresh token to renew access when the access token expires, so you usually do not need to sign in manually.
+
+Refresh tokens are valid for 180 days. Each successful refresh issues a new refresh token, so this does not mean you must sign in again every 180 days.
