@@ -4,7 +4,7 @@
 
 This guide describes COROS MCP tools, their main parameters, returned information, and usage limits.
 
-[Activities and analysis](#activities) | [Health and recovery](#health) | [Training plans and workouts](#training) | [Profile and devices](#profile)
+[Activities and analysis](#activities) | [Health and recovery](#health) | [Training plans and workouts](#training) | [Routes](#routes) | [Profile and devices](#profile)
 
 <a id="activities"></a>
 
@@ -712,6 +712,35 @@ Edit a supported workout scheduled separately on a date.
 - Supports running, cycling, and trail running. Read the workout details for that date, confirm it is editable, and provide its complete updated content.
 - Only the workout on that date is changed; library content stays unchanged. Use `updateTrainingPlan` for plan workouts.
 - Rescheduling and removal are not supported; use the COROS app for those actions.
+
+<a id="routes"></a>
+
+## Routes
+
+<a id="uploadroutefile"></a>
+
+### `uploadRouteFile`
+
+Import a GPX or KML route file into the COROS app for later syncing to a watch for navigation.
+
+**Main parameters**
+
+| Parameter | Type | Requirement | Description |
+|---|---|---|---|
+| `fileName` | string | Required | Original file name, including the `.gpx` or `.kml` extension. |
+| `fileContent` | string | Required | The complete, original XML text of the file, without truncation or rewriting. |
+| `routeType` | integer | Required | Route type: 1=cycling; 2=walking, running, trail running, or hiking. |
+| `routeName` | string | Optional | Route name shown in the app; defaults to the file name without its extension. Names longer than 95 characters are truncated. |
+
+**Returns:** File acceptance result, including the route name, file format, route type, number of track points, and distance in km; a reason is returned if the upload fails.
+
+**Limits and notes**
+
+- Uploads one GPX or KML file per call. The file must contain at least 2 track points.
+- An accepted result means the file has been submitted for processing; it does not confirm that the import is complete. The route usually appears in the COROS app's Routes list within a few minutes. If it does not appear, the file may contain a track format COROS cannot parse.
+- After import, sync the route to your watch through the COROS app. This tool does not sync directly to the watch.
+- The same file cannot be uploaded again while its route remains in the app or is still being processed. It can be imported again after the existing route is deleted in the app.
+- File size and upload limits apply; follow the returned guidance if a limit is exceeded.
 
 <a id="profile"></a>
 
